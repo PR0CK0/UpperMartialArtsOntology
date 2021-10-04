@@ -17,4 +17,4 @@ I am not a mystic, therefore knowledge must be derived from thought. This ontolo
 No, not really. I will never be satisfied with it. It may serve well as a basis for someone else who is more knowledgeable, but I will probably be editing it for a long time intermittently.
 
 # Can I use it?
-I don't care lol. Just link back to this Github for reference to future versions.
+Yes; just link back to this Github for reference to future versions.
