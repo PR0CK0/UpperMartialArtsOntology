@@ -1,0 +1,2724 @@
+@prefix : <http://Psychobagger.github.io/umao#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix schema: <https://schema.org/> .
+@base <http://PR0CK0.github.io/umao/> .
+
+<http://PR0CK0.github.io/umao/> rdf:type owl:Ontology ;
+                                 dct:creator "Procko"@en ;
+                                 dct:description "A metadata ontology for describing the various martial arts."@en ;
+                                 dct:modified "2021-06-15"^^xsd:string ;
+                                 dct:title "Upper Martial Arts Ontology"@en ;
+                                 vann:preferredNamespacePrefix "umao"^^xsd:string ;
+                                 vann:preferredNamespaceUri "http://PR0CK0.github.io/mao/"^^xsd:string ;
+                                 rdfs:comment "Aligns with schema.org and provides a relatively high-level vocabulary for the description of the various martial arts."^^xsd:string ;
+                                 rdfs:label "Upper Martial Arts Ontology" ;
+                                 rdfs:seeAlso "https://en.wikipedia.org/wiki/Martial_arts"^^xsd:string ;
+                                 owl:versionInfo "0.0.1"@en ;
+                                 skos:altLabel "UMAO" ;
+                                 skos:prefLabel "Upper Martial Arts Ontology" .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/terms/creator
+dct:creator rdf:type owl:AnnotationProperty ;
+            rdfs:isDefinedBy "http://purl.org/dc/terms/"@en .
+
+
+###  http://purl.org/dc/terms/description
+dct:description rdf:type owl:AnnotationProperty ;
+                rdfs:isDefinedBy "http://purl.org/dc/terms/"@en .
+
+
+###  http://purl.org/dc/terms/modified
+dct:modified rdf:type owl:AnnotationProperty ;
+             rdfs:isDefinedBy "http://purl.org/dc/terms/"@en .
+
+
+###  http://purl.org/dc/terms/title
+dct:title rdf:type owl:AnnotationProperty ;
+          rdfs:isDefinedBy "http://purl.org/dc/terms/"@en .
+
+
+###  http://purl.org/vocab/vann/preferredNamespacePrefix
+vann:preferredNamespacePrefix rdf:type owl:AnnotationProperty ;
+                              rdfs:isDefinedBy "http://purl.org/vocab/vann/" .
+
+
+###  http://purl.org/vocab/vann/preferredNamespaceUri
+vann:preferredNamespaceUri rdf:type owl:AnnotationProperty ;
+                           rdfs:isDefinedBy "http://purl.org/vocab/vann/" .
+
+
+###  http://www.w3.org/2004/02/skos/core#altLabel
+skos:altLabel rdf:type owl:AnnotationProperty ;
+              rdfs:isDefinedBy "http://www.w3.org/2004/02/skos/core"@en .
+
+
+###  http://www.w3.org/2004/02/skos/core#prefLabel
+skos:prefLabel rdf:type owl:AnnotationProperty ;
+               rdfs:isDefinedBy "http://www.w3.org/2004/02/skos/core"@en .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://Psychobagger.github.io/umao#affectedBy
+:affectedBy rdf:type owl:ObjectProperty ;
+            owl:inverseOf :affects ;
+            rdfs:domain :MartialArtTechnique ;
+            rdfs:range [ rdf:type owl:Class ;
+                         owl:unionOf ( :MartialArtEquipment
+                                       :MidFightComponent
+                                     )
+                       ] ;
+            rdfs:comment "Some martial art technique is affected by some martial art equipment or some component of some occuring fight."@en .
+
+
+###  http://Psychobagger.github.io/umao#affects
+:affects rdf:type owl:ObjectProperty ;
+         rdfs:domain [ rdf:type owl:Class ;
+                       owl:unionOf ( :MartialArtEquipment
+                                     :MidFightComponent
+                                   )
+                     ] ;
+         rdfs:range :MartialArtTechnique ;
+         rdfs:comment "Some martial art equipment or some component of some occuring fight affects some martial art technique."@en .
+
+
+###  http://Psychobagger.github.io/umao#begins
+:begins rdf:type owl:ObjectProperty ;
+        owl:inverseOf :beginsWith ;
+        rdfs:domain :Initiation ;
+        rdfs:range :MartialArtExecution ;
+        rdfs:comment "Some initiation begins some martial art execution."@en ;
+        rdfs:label "begins"@en .
+
+
+###  http://Psychobagger.github.io/umao#beginsWith
+:beginsWith rdf:type owl:ObjectProperty ;
+            rdfs:domain :MartialArtExecution ;
+            rdfs:range :Initiation ;
+            rdfs:comment "Some martial art execution begins with some initiation."@en ;
+            rdfs:label "begins with"@en .
+
+
+###  http://Psychobagger.github.io/umao#binds
+:binds rdf:type owl:ObjectProperty ;
+       owl:inverseOf :boundBy ;
+       rdfs:domain :MartialArtRule ;
+       rdfs:range [ rdf:type owl:Class ;
+                    owl:unionOf ( :MartialArt
+                                  :MartialArtSport
+                                )
+                  ] ;
+       rdfs:comment "Some martial art rule binds some martial art or its sport."@en ;
+       rdfs:label "binds"@en .
+
+
+###  http://Psychobagger.github.io/umao#boundBy
+:boundBy rdf:type owl:ObjectProperty ;
+         rdfs:domain [ rdf:type owl:Class ;
+                       owl:unionOf ( :MartialArt
+                                     :MartialArtSport
+                                   )
+                     ] ;
+         rdfs:range :MartialArtRule ;
+         rdfs:comment "Some martial art or its sport is bound by some martial art rule"@en ;
+         rdfs:label "bound by"@en .
+
+
+###  http://Psychobagger.github.io/umao#composedOf
+:composedOf rdf:type owl:ObjectProperty ;
+            owl:inverseOf :composes ;
+            rdfs:domain :MartialArtExecution ;
+            rdfs:range :MartialArtTechnique ;
+            rdfs:comment "Some martial art execution is composed of some martial art technique (generally more than one)."@en ;
+            rdfs:label "composed of"@en .
+
+
+###  http://Psychobagger.github.io/umao#composes
+:composes rdf:type owl:ObjectProperty ;
+          rdfs:domain :MartialArtTechnique ;
+          rdfs:range :MartialArtExecution ;
+          rdfs:comment "Some martial art technique (generally more than one) composes some martial art execution."@en ;
+          rdfs:label "composes"@en .
+
+
+###  http://Psychobagger.github.io/umao#derivedFrom
+:derivedFrom rdf:type owl:ObjectProperty ;
+             rdfs:domain :MartialArtSport ;
+             rdfs:range :MartialArt .
+
+
+###  http://Psychobagger.github.io/umao#determinedBy
+:determinedBy rdf:type owl:ObjectProperty ;
+              owl:inverseOf :determines ;
+              rdfs:domain :FightOutcome ;
+              rdfs:range [ rdf:type owl:Class ;
+                           owl:unionOf ( :MartialArtSportScoringSystem
+                                         :Termination
+                                       )
+                         ] ;
+              rdfs:comment "Some fight outcome is determined by some martial art termination or some martial art scoring system."@en ;
+              rdfs:label "determined by"@en .
+
+
+###  http://Psychobagger.github.io/umao#determines
+:determines rdf:type owl:ObjectProperty ;
+            rdfs:domain [ rdf:type owl:Class ;
+                          owl:unionOf ( :MartialArtSportScoringSystem
+                                        :Termination
+                                      )
+                        ] ;
+            rdfs:range :FightOutcome ;
+            rdfs:comment "Some martial art termination or martial art scoring system determines some fight outcome."@en ;
+            rdfs:label "determines"@en .
+
+
+###  http://Psychobagger.github.io/umao#ends
+:ends rdf:type owl:ObjectProperty ;
+      owl:inverseOf :endsWith ;
+      rdfs:domain :Termination ;
+      rdfs:range :MartialArtExecution ;
+      rdfs:comment "Some termination ends some martial art execution."@en ;
+      rdfs:label "ends"@en .
+
+
+###  http://Psychobagger.github.io/umao#endsWith
+:endsWith rdf:type owl:ObjectProperty ;
+          rdfs:domain :MartialArtExecution ;
+          rdfs:range :Termination ;
+          rdfs:comment "Some martial art execution ends with some termination."@en ;
+          rdfs:label "ends with"@en .
+
+
+###  http://Psychobagger.github.io/umao#enforcesRulesOn
+:enforcesRulesOn rdf:type owl:ObjectProperty ;
+                 owl:inverseOf :rulesEnforcedBy ;
+                 rdfs:domain :MartialArtGoverningBody ;
+                 rdfs:range [ rdf:type owl:Class ;
+                              owl:unionOf ( :MartialArt
+                                            :MartialArtSport
+                                          )
+                            ] .
+
+
+###  http://Psychobagger.github.io/umao#engagedBy
+:engagedBy rdf:type owl:ObjectProperty ;
+           owl:inverseOf :engagesIn ;
+           rdfs:domain :MartialArtExecution ;
+           rdfs:range :MartialArtAgent ;
+           rdfs:comment "Some martial art execution is engaged in by some martial art agent."@en ;
+           rdfs:label "engaged by"@en .
+
+
+###  http://Psychobagger.github.io/umao#engagesIn
+:engagesIn rdf:type owl:ObjectProperty ;
+           rdfs:domain :MartialArtAgent ;
+           rdfs:range :MartialArtExecution ;
+           rdfs:comment "Some martial art agent engages in some martial art execution."@en ;
+           rdfs:label "engages in"@en .
+
+
+###  http://Psychobagger.github.io/umao#hosts
+:hosts rdf:type owl:ObjectProperty ;
+       owl:inverseOf :takesPlaceIn ;
+       rdfs:domain :MartialArtExecutionPlace ;
+       rdfs:range :MartialArtExecution ;
+       rdfs:comment "Some martial art execution place hosts some martial art execution."@en ;
+       rdfs:label "hosts"@en .
+
+
+###  http://Psychobagger.github.io/umao#injures
+:injures rdf:type owl:ObjectProperty ;
+         rdfs:domain :UnarmedAttackingTechnique ;
+         rdfs:range :BodyPart ;
+         rdfs:comment "Some attacking technique injures some opponent body part."@en ;
+         rdfs:label "injures"@en .
+
+
+###  http://Psychobagger.github.io/umao#learnsBy
+:learnsBy rdf:type owl:ObjectProperty ;
+          rdfs:domain [ rdf:type owl:Class ;
+                        owl:unionOf ( :MartialArtCombatant
+                                      :MartialArtStudent
+                                    )
+                      ] ;
+          rdfs:range :MartialArtTraining .
+
+
+###  http://Psychobagger.github.io/umao#mayResultIn
+:mayResultIn rdf:type owl:ObjectProperty ;
+             rdfs:domain :MartialArtTechnique ;
+             rdfs:range :Termination ;
+             rdfs:comment "Some martial art technique may result in some fight termination."@en ;
+             rdfs:label "may result in"@en .
+
+
+###  http://Psychobagger.github.io/umao#opensUp
+:opensUp rdf:type owl:ObjectProperty ;
+         rdfs:domain :UnarmedAttackingTechnique ;
+         rdfs:range :TargetBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#performedBy
+:performedBy rdf:type owl:ObjectProperty ;
+             owl:inverseOf :performs ;
+             rdfs:domain :MartialArtTechnique ;
+             rdfs:range :BodyPart .
+
+
+###  http://Psychobagger.github.io/umao#performedOn
+:performedOn rdf:type owl:ObjectProperty ;
+             rdfs:domain :MartialArtTechnique ;
+             rdfs:range :TargetBodyPart ;
+             rdfs:comment "Some attacking martial art technique is performed on some body part of an opponent."@en ;
+             rdfs:label "performed on"@en ;
+             skos:prefLabel "performed on"@en .
+
+
+###  http://Psychobagger.github.io/umao#performs
+:performs rdf:type owl:ObjectProperty ;
+          rdfs:domain :BodyPart ;
+          rdfs:range :MartialArtTechnique .
+
+
+###  http://Psychobagger.github.io/umao#practicedBy
+:practicedBy rdf:type owl:ObjectProperty ;
+             owl:inverseOf :practices ;
+             rdfs:domain :MartialArt ;
+             rdfs:range :MartialArtAgent ;
+             rdfs:comment "Some martial art is practiced by some martial art agent."@en ;
+             rdfs:label "practiced by"@en ;
+             skos:altLabel "participated in by"@en ;
+             skos:prefLabel "practiced by"@en .
+
+
+###  http://Psychobagger.github.io/umao#practices
+:practices rdf:type owl:ObjectProperty ;
+           rdfs:domain :MartialArtAgent ;
+           rdfs:range :MartialArt ;
+           rdfs:comment "Some martial art agent practices some martial art."@en ;
+           rdfs:label "practices"@en ;
+           skos:altLabel "participates in"@en ;
+           skos:prefLabel "practices"@en .
+
+
+###  http://Psychobagger.github.io/umao#precededBy
+:precededBy rdf:type owl:ObjectProperty ;
+            owl:inverseOf :precedes ;
+            rdfs:domain :MartialArtTechnique ;
+            rdfs:range :MartialArtMuscleAction .
+
+
+###  http://Psychobagger.github.io/umao#precedes
+:precedes rdf:type owl:ObjectProperty ;
+          rdfs:domain :MartialArtMuscleAction ;
+          rdfs:range :MartialArtTechnique .
+
+
+###  http://Psychobagger.github.io/umao#prescribedBy
+:prescribedBy rdf:type owl:ObjectProperty ;
+              owl:inverseOf :prescribes ;
+              rdfs:domain :MartialArtSportRankingSystem ;
+              rdfs:range :MartialArtGoverningBody .
+
+
+###  http://Psychobagger.github.io/umao#prescribes
+:prescribes rdf:type owl:ObjectProperty ;
+            rdfs:domain :MartialArtGoverningBody ;
+            rdfs:range :MartialArtSportRankingSystem .
+
+
+###  http://Psychobagger.github.io/umao#prohibitedBy
+:prohibitedBy rdf:type owl:ObjectProperty ;
+              owl:inverseOf :prohibits ;
+              rdfs:domain :MartialArtTechnique ;
+              rdfs:range :TechniqueRule ;
+              rdfs:comment "Some martial art technique is prohibited by some martial art technique rule."@en ;
+              rdfs:label "prohibited by"@en .
+
+
+###  http://Psychobagger.github.io/umao#prohibits
+:prohibits rdf:type owl:ObjectProperty ;
+           rdfs:domain :TechniqueRule ;
+           rdfs:range :MartialArtTechnique ;
+           rdfs:comment "Some martial art technique rule prohibits some martial art technique"@en ;
+           rdfs:label "prohibits"@en .
+
+
+###  http://Psychobagger.github.io/umao#rulesEnforcedBy
+:rulesEnforcedBy rdf:type owl:ObjectProperty ;
+                 rdfs:domain [ rdf:type owl:Class ;
+                               owl:unionOf ( :MartialArt
+                                             :MartialArtSport
+                                           )
+                             ] ;
+                 rdfs:range :MartialArtGoverningBody .
+
+
+###  http://Psychobagger.github.io/umao#subjectTo
+:subjectTo rdf:type owl:ObjectProperty ;
+           owl:inverseOf :subjects ;
+           rdfs:domain :MartialArtTechnique ;
+           rdfs:range :MartialArtStance .
+
+
+###  http://Psychobagger.github.io/umao#subjects
+:subjects rdf:type owl:ObjectProperty ;
+          rdfs:domain :MartialArtStance ;
+          rdfs:range :MartialArtTechnique .
+
+
+###  http://Psychobagger.github.io/umao#takesPlaceIn
+:takesPlaceIn rdf:type owl:ObjectProperty ;
+              rdfs:domain :MartialArtExecution ;
+              rdfs:range :MartialArtExecutionPlace ;
+              rdfs:comment "Some martial art execution takes place in some martial art execution place."@en ;
+              rdfs:label "takes place in"@en .
+
+
+###  http://Psychobagger.github.io/umao#usedBy
+:usedBy rdf:type owl:ObjectProperty ;
+        owl:inverseOf :uses ;
+        rdfs:domain [ rdf:type owl:Class ;
+                      owl:unionOf ( :MartialArtEquipment
+                                    :MartialArtStance
+                                    :MartialArtTechnique
+                                  )
+                    ] ;
+        rdfs:range :MartialArtAgent ;
+        rdfs:comment "Some martial art technique, stance or equipment is used by some martial art agent."@en ;
+        rdfs:label "used by"@en .
+
+
+###  http://Psychobagger.github.io/umao#uses
+:uses rdf:type owl:ObjectProperty ;
+      rdfs:domain :MartialArtAgent ;
+      rdfs:range [ rdf:type owl:Class ;
+                   owl:unionOf ( :MartialArtEquipment
+                                 :MartialArtStance
+                                 :MartialArtTechnique
+                               )
+                 ] ;
+      rdfs:comment "Some martial art agent uses some technique, equipment or stance."@en ;
+      rdfs:label "uses"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://Psychobagger.github.io/umao#hasNumberOfMartialArtAgents
+:hasNumberOfMartialArtAgents rdf:type owl:DatatypeProperty ;
+                             rdfs:domain :MartialArtAgent ;
+                             rdfs:range xsd:integer ;
+                             rdfs:comment "Some martial art execution has some number of martial art agents." ;
+                             rdfs:label "has number of martial art agents" .
+
+
+###  http://Psychobagger.github.io/umao#hasNumberOfMartialArtCombatants
+:hasNumberOfMartialArtCombatants rdf:type owl:DatatypeProperty ;
+                                 rdfs:subPropertyOf :hasNumberOfMartialArtAgents ;
+                                 rdfs:domain [ rdf:type owl:Class ;
+                                               owl:unionOf ( :MartialArtFighting
+                                                             :TrainingFight
+                                                           )
+                                             ] ;
+                                 rdfs:range xsd:integer ;
+                                 rdfs:comment "Some training fight or fight has some number of martial art combatants." ;
+                                 rdfs:label "has number of martial art combatants" .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://Psychobagger.github.io/umao#AdmissionSubmission
+:AdmissionSubmission rdf:type owl:Class ;
+                     rdfs:subClassOf :Submission ;
+                     rdfs:comment "An end of some martial art execution where some martial art agent requests to stop."@en ;
+                     rdfs:label "Admission Submission"@en ;
+                     skos:prefLabel "Admission Submission"@en .
+
+
+###  http://Psychobagger.github.io/umao#AdvancingTechnique
+:AdvancingTechnique rdf:type owl:Class ;
+                    rdfs:subClassOf :UnarmedPositioningTechnique .
+
+
+###  http://Psychobagger.github.io/umao#Ankle
+:Ankle rdf:type owl:Class ;
+       rdfs:subClassOf :HoldingTargetBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#AnkleEquipment
+:AnkleEquipment rdf:type owl:Class ;
+                rdfs:subClassOf :LowerBodyEquipment .
+
+
+###  http://Psychobagger.github.io/umao#ArmEquipment
+:ArmEquipment rdf:type owl:Class ;
+              rdfs:subClassOf :UpperBodyEquipment .
+
+
+###  http://Psychobagger.github.io/umao#ArmLock
+:ArmLock rdf:type owl:Class ;
+         rdfs:subClassOf :Lock ;
+         rdfs:comment "A martial art technique in which some arm of some opponent is locked by some attacker."@en ;
+         rdfs:label "Arm Lock"@en ;
+         skos:prefLabel "Arm Lock"@en .
+
+
+###  http://Psychobagger.github.io/umao#ArmedFightingTechnique
+:ArmedFightingTechnique rdf:type owl:Class ;
+                        rdfs:subClassOf :MartialArtTechnique ;
+                        rdfs:comment "A martial art technique which is performed with some weapon which is used by some martial art agent."@en .
+
+
+###  http://Psychobagger.github.io/umao#ArmedMartialArtCombatant
+:ArmedMartialArtCombatant rdf:type owl:Class ;
+                          rdfs:subClassOf :MartialArtCombatant ;
+                          rdfs:comment "A martial art agent who is armed with a weapon."@en ;
+                          rdfs:label "Armed Martial Art Combatant"@en ;
+                          skos:prefLabel "Armed Martial Art Combatant"@en .
+
+
+###  http://Psychobagger.github.io/umao#Back
+:Back rdf:type owl:Class ;
+      rdfs:subClassOf :SelfBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#BackThrow
+:BackThrow rdf:type owl:Class ;
+           rdfs:subClassOf :Throw .
+
+
+###  http://Psychobagger.github.io/umao#Backfist
+:Backfist rdf:type owl:Class ;
+          rdfs:subClassOf :PunchStrike .
+
+
+###  http://Psychobagger.github.io/umao#Backslap
+:Backslap rdf:type owl:Class ;
+          rdfs:subClassOf :OpenHandedStrike ;
+          rdfs:comment "A martial art technique which strikes with the rear side of some hand."@en ;
+          rdfs:label "Backslap"@en ;
+          skos:prefLabel "Backslap"@en .
+
+
+###  http://Psychobagger.github.io/umao#Backstep
+:Backstep rdf:type owl:Class ;
+          rdfs:subClassOf :RetreatingTechnique .
+
+
+###  http://Psychobagger.github.io/umao#Belt
+:Belt rdf:type owl:Class ;
+      rdfs:subClassOf :LowerBodyEquipment .
+
+
+###  http://Psychobagger.github.io/umao#Bicep
+:Bicep rdf:type owl:Class ;
+       rdfs:subClassOf :StrikingTargetBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#Biting
+:Biting rdf:type owl:Class ;
+        rdfs:subClassOf :DirtyTechnique ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :performedBy ;
+                          owl:allValuesFrom :Teeth
+                        ] ;
+        rdfs:comment "A martial art technique in which the teeth are used against some opponent."@en ;
+        rdfs:label "Biting"@en ;
+        skos:prefLabel "Biting"@en .
+
+
+###  http://Psychobagger.github.io/umao#Block
+:Block rdf:type owl:Class ;
+       rdfs:subClassOf :UnarmedDefendingTechnique ;
+       rdfs:comment "A martial art technique in which some part of the body, or a movement of the body, is used to block some incoming attack or advancement from some opponent."@en ;
+       rdfs:label "Block"@en ;
+       skos:prefLabel "Block"@en .
+
+
+###  http://Psychobagger.github.io/umao#BlockingFocusedMartialArt
+:BlockingFocusedMartialArt rdf:type owl:Class ;
+                           rdfs:subClassOf :StrikingFocusedMartialArt ;
+                           rdfs:comment "A martial art which focuses on blocking incoming attacks."@en .
+
+
+###  http://Psychobagger.github.io/umao#BludgeoningWeaponsFocusedMartialArt
+:BludgeoningWeaponsFocusedMartialArt rdf:type owl:Class ;
+                                     rdfs:subClassOf :CloseWeaponsFocusedMartialArt .
+
+
+###  http://Psychobagger.github.io/umao#BodyAdvantageTechnique
+:BodyAdvantageTechnique rdf:type owl:Class ;
+                        rdfs:subClassOf :MartialArtTechnique ;
+                        rdfs:comment "A martial art technique which uses some bodily advantage over some other martial art agent."@en .
+
+
+###  http://Psychobagger.github.io/umao#BodyEquipment
+:BodyEquipment rdf:type owl:Class ;
+               rdfs:subClassOf :MartialArtEquipment .
+
+
+###  http://Psychobagger.github.io/umao#BodyFocusedMartialArt
+:BodyFocusedMartialArt rdf:type owl:Class ;
+                       rdfs:subClassOf :PracticalityFocusedMartialArt ;
+                       rdfs:comment "A martial art which focuses on the human body as target and weapon."@en ;
+                       rdfs:label "Body Focused Martial Art"@en ;
+                       skos:prefLabel "Body Focused Martial Art"@en .
+
+
+###  http://Psychobagger.github.io/umao#BodyPart
+:BodyPart rdf:type owl:Class ;
+          rdfs:subClassOf <http://schema.org/AnatomicalStructure> ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :performs ;
+                            owl:someValuesFrom :MartialArtTechnique
+                          ] ;
+          rdfs:comment "A part of the human body."@en ;
+          rdfs:label "Body Part"@en ;
+          skos:prefLabel "Body Part"@en .
+
+
+###  http://Psychobagger.github.io/umao#BodyPartInjury
+:BodyPartInjury rdf:type owl:Class ;
+                rdfs:subClassOf :TechnicalKnockout ;
+                rdfs:comment "An end of some martial art execution where some martial art agent is technically knocked out due to an injury to some body part."@en ;
+                rdfs:label "Body Part Injury"@en ;
+                skos:prefLabel "Body Part Injury"@en .
+
+
+###  http://Psychobagger.github.io/umao#BodyPositionShift
+:BodyPositionShift rdf:type owl:Class ;
+                   rdfs:subClassOf :TelegraphedAction .
+
+
+###  http://Psychobagger.github.io/umao#BodyShove
+:BodyShove rdf:type owl:Class ;
+           rdfs:subClassOf :Throw ,
+                           :Trip .
+
+
+###  http://Psychobagger.github.io/umao#BoneInjury
+:BoneInjury rdf:type owl:Class ;
+            rdfs:subClassOf :BodyPartInjury ;
+            rdfs:comment "An end of some martial art execution where some martial art agent is technically knocked out due to an injury to some bone."@en ;
+            rdfs:label "Bone Injury"@en ;
+            skos:prefLabel "Bone Injury"@en .
+
+
+###  http://Psychobagger.github.io/umao#BoundaryEquipment
+:BoundaryEquipment rdf:type owl:Class ;
+                   rdfs:subClassOf :EnvironmentEquipment .
+
+
+###  http://Psychobagger.github.io/umao#Brawl
+:Brawl rdf:type owl:Class ;
+       owl:equivalentClass :ManyManFight ;
+       rdfs:subClassOf :MultipleAgentFight .
+
+
+###  http://Psychobagger.github.io/umao#Cadence
+:Cadence rdf:type owl:Class ;
+         owl:equivalentClass :Rhythm ;
+         rdfs:subClassOf :MidFightComponent .
+
+
+###  http://Psychobagger.github.io/umao#CeremonyRule
+:CeremonyRule rdf:type owl:Class ;
+              rdfs:subClassOf :MartialArtRule ;
+              rdfs:comment "A rule which provides structure and adherence to some ceremony associated with some martial art. Ceremonies are often traditions passed down through the martial art executions of a culture or ethnic group."@en ;
+              rdfs:label "Ceremony Rule"@en ;
+              skos:prefLabel "Ceremony Rule"@en .
+
+
+###  http://Psychobagger.github.io/umao#ChestEquipment
+:ChestEquipment rdf:type owl:Class ;
+                rdfs:subClassOf :TrainingEquipment .
+
+
+###  http://Psychobagger.github.io/umao#Chin
+:Chin rdf:type owl:Class ;
+      rdfs:subClassOf :StrikingTargetBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#Choke
+:Choke rdf:type owl:Class ;
+       rdfs:subClassOf :Lock ;
+       rdfs:comment "A martial art technique in which the neck or throat of some opponent is locked by some attacker."@en ;
+       rdfs:label "Choke"@en ;
+       skos:prefLabel "Choke"@en .
+
+
+###  http://Psychobagger.github.io/umao#CircleLeft
+:CircleLeft rdf:type owl:Class ;
+            rdfs:subClassOf :RepositioningTechnique .
+
+
+###  http://Psychobagger.github.io/umao#CircleRight
+:CircleRight rdf:type owl:Class ;
+             rdfs:subClassOf :RepositioningTechnique .
+
+
+###  http://Psychobagger.github.io/umao#Clinch
+:Clinch rdf:type owl:Class ;
+        rdfs:subClassOf :Hold .
+
+
+###  http://Psychobagger.github.io/umao#ClinchingFocusMartialArt
+:ClinchingFocusMartialArt rdf:type owl:Class ;
+                          rdfs:subClassOf :HoldingFocusedMartialArt .
+
+
+###  http://Psychobagger.github.io/umao#CloseWeaponsFocusedMartialArt
+:CloseWeaponsFocusedMartialArt rdf:type owl:Class ;
+                               rdfs:subClassOf :WeaponsFocusedMartialArt .
+
+
+###  http://Psychobagger.github.io/umao#CombinationTechnique
+:CombinationTechnique rdf:type owl:Class ;
+                      rdfs:subClassOf :UnarmedFightingTechnique ;
+                      rdfs:comment "A martial art technique which is a combination, or chain, of two or more techniques."@en ;
+                      rdfs:label "Combination Technique"@en ;
+                      skos:altLabel "Combo"@en ;
+                      skos:prefLabel "Combination Technique"@en .
+
+
+###  http://Psychobagger.github.io/umao#CompressionLock
+:CompressionLock rdf:type owl:Class ;
+                 rdfs:subClassOf :Lock ;
+                 rdfs:comment "A martial art technique in which some larger part of some opponent's body (like the ribcage or a thigh) is locked by some attacker."@en ;
+                 rdfs:label "Compression Lock"@en ;
+                 skos:prefLabel "Compression Lock"@en .
+
+
+###  http://Psychobagger.github.io/umao#CooperativeTeamSport
+:CooperativeTeamSport rdf:type owl:Class ;
+                      rdfs:subClassOf :TeamSport .
+
+
+###  http://Psychobagger.github.io/umao#Cross
+:Cross rdf:type owl:Class ;
+       rdfs:subClassOf :PunchStrike ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :performedBy ;
+                         owl:allValuesFrom :RearHand
+                       ] .
+
+
+###  http://Psychobagger.github.io/umao#CuttingWeaponsFocusedMartialArt
+:CuttingWeaponsFocusedMartialArt rdf:type owl:Class ;
+                                 rdfs:subClassOf :CloseWeaponsFocusedMartialArt .
+
+
+###  http://Psychobagger.github.io/umao#Death
+:Death rdf:type owl:Class ;
+       rdfs:subClassOf :Termination ;
+       rdfs:comment "An end of some martial art execution where some martial art agent dies."@en ;
+       rdfs:label "Death"@en ;
+       skos:altLabel "Eternal Termination"@en ,
+                     "Final Termination"@en ;
+       skos:prefLabel "Death"@en .
+
+
+###  http://Psychobagger.github.io/umao#DirectionTechnique
+:DirectionTechnique rdf:type owl:Class ;
+                    rdfs:subClassOf :EnvironmentUsageTechnique .
+
+
+###  http://Psychobagger.github.io/umao#DirtyTechnique
+:DirtyTechnique rdf:type owl:Class ;
+                rdfs:subClassOf :UnarmedAttackingTechnique ;
+                rdfs:comment "A martial art technique which is considered to be \"dirty\", by virtue of ruthlessness, efficacy, or perceived imbalance in fights. A typical \"dirty move\" is eye gouging. The author would like to note that dirty moves do not exist in real, non-sporting fighting."@en ;
+                rdfs:label "Dirty Technique"@en ;
+                skos:altLabel "Bad Move"@en ,
+                              "Dirty Move"@en ,
+                              "Foul Move"@en ,
+                              "Illegal Move"@en ,
+                              "Nasty Move"@en ,
+                              "Unfair Move"@en ,
+                              "Unsportsmanlike Move"@en ;
+                skos:prefLabel "Dirty Technique"@en .
+
+
+###  http://Psychobagger.github.io/umao#Dodge
+:Dodge rdf:type owl:Class ;
+       rdfs:subClassOf :UnarmedDefendingTechnique .
+
+
+###  http://Psychobagger.github.io/umao#DominantSideBackwardStance
+:DominantSideBackwardStance rdf:type owl:Class ;
+                            owl:equivalentClass :SubordinateSideForwardStance ;
+                            rdfs:subClassOf :MartialArtStance ;
+                            rdfs:comment "A position in which some martial art agent is found with their dominant side farthest from some opponent."@en .
+
+
+###  http://Psychobagger.github.io/umao#DominantSideForwardStance
+:DominantSideForwardStance rdf:type owl:Class ;
+                           owl:equivalentClass :SubordinateSideBackwardStance ;
+                           rdfs:subClassOf :MartialArtStance ;
+                           rdfs:comment "A position in which some martial art agent is found with their dominant side closest to some opponent."@en .
+
+
+###  http://Psychobagger.github.io/umao#Draw
+:Draw rdf:type owl:Class ;
+      rdfs:subClassOf :FightOutcome ;
+      rdfs:comment "The outcome of some martial art execution where no definitive winner or loser is identified after termination."@en ;
+      rdfs:label "Draw"@en ;
+      skos:altLabel "Tie"@en ;
+      skos:prefLabel "Draw"@en .
+
+
+###  http://Psychobagger.github.io/umao#Drilling
+:Drilling rdf:type owl:Class ;
+          rdfs:subClassOf :MartialArtTraining .
+
+
+###  http://Psychobagger.github.io/umao#Duck
+:Duck rdf:type owl:Class ;
+      rdfs:subClassOf :UnarmedDefendingTechnique .
+
+
+###  http://Psychobagger.github.io/umao#Ear
+:Ear rdf:type owl:Class ;
+     rdfs:subClassOf :StrikingTargetBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#EarClap
+:EarClap rdf:type owl:Class ;
+         rdfs:subClassOf :DirtyTechnique ,
+                         :OpenHandedStrike .
+
+
+###  http://Psychobagger.github.io/umao#Elbow
+:Elbow rdf:type owl:Class ;
+       rdfs:subClassOf :HoldingTargetBodyPart ,
+                       :StrikingTargetBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#ElbowStrike
+:ElbowStrike rdf:type owl:Class ;
+             rdfs:subClassOf :Strike ;
+             rdfs:comment "A martial art technique which strikes with some elbow."@en ;
+             rdfs:label "Elbow Strike"@en ;
+             skos:prefLabel "Elbow Strike"@en .
+
+
+###  http://Psychobagger.github.io/umao#EnvironmentEquipment
+:EnvironmentEquipment rdf:type owl:Class ;
+                      rdfs:subClassOf :MartialArtEquipment .
+
+
+###  http://Psychobagger.github.io/umao#EnvironmentUsageTechnique
+:EnvironmentUsageTechnique rdf:type owl:Class ;
+                           rdfs:subClassOf :MartialArtTechnique ;
+                           rdfs:comment "A martial art technique which uses the environment."@en .
+
+
+###  http://Psychobagger.github.io/umao#EquipmentManipulationFocusedMartialArt
+:EquipmentManipulationFocusedMartialArt rdf:type owl:Class ;
+                                        rdfs:subClassOf :HoldingFocusedMartialArt ;
+                                        rdfs:comment "A martial art which focuses on the manipulation of opponent equipment."@en .
+
+
+###  http://Psychobagger.github.io/umao#EquipmentRule
+:EquipmentRule rdf:type owl:Class ;
+               rdfs:subClassOf :MartialArtRule ;
+               rdfs:comment "A rule which provides guidelines for some equipment which is used in some martial art."@en ;
+               rdfs:label "Equipment Rule"@en ;
+               skos:prefLabel "Equipment Rule"@en .
+
+
+###  http://Psychobagger.github.io/umao#EquippedTarget
+:EquippedTarget rdf:type owl:Class ;
+                rdfs:subClassOf :Target .
+
+
+###  http://Psychobagger.github.io/umao#Eye
+:Eye rdf:type owl:Class ;
+     rdfs:subClassOf :StrikingTargetBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#EyeDistraction
+:EyeDistraction rdf:type owl:Class ;
+                rdfs:subClassOf :UnarmedMentalDisturbanceTechnique .
+
+
+###  http://Psychobagger.github.io/umao#FallingFocusedMartialArt
+:FallingFocusedMartialArt rdf:type owl:Class ;
+                          rdfs:subClassOf :HoldingFocusedMartialArt .
+
+
+###  http://Psychobagger.github.io/umao#Feint
+:Feint rdf:type owl:Class ;
+       rdfs:subClassOf :UnarmedMentalDisturbanceTechnique .
+
+
+###  http://Psychobagger.github.io/umao#FightComponent
+:FightComponent rdf:type owl:Class ;
+                rdfs:subClassOf <http://schema.org/Intangible> ;
+                rdfs:comment "A component of some martial art execution."@en ;
+                rdfs:label "Fight Component"@en ;
+                skos:altLabel "Martial Art Execution Component"@en ;
+                skos:prefLabel "Fight Component"@en .
+
+
+###  http://Psychobagger.github.io/umao#FightInitiationRule
+:FightInitiationRule rdf:type owl:Class ;
+                     rdfs:subClassOf :MartialArtRule ;
+                     rdfs:comment "A rule which provides guidelines for an initiation of some martial art execution."@en ;
+                     rdfs:label "Fight Initiation Rule"@en ;
+                     skos:prefLabel "Fight Initiation Rule"@en .
+
+
+###  http://Psychobagger.github.io/umao#FightOutcome
+:FightOutcome rdf:type owl:Class ;
+              rdfs:subClassOf :FightComponent ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :determinedBy ;
+                                owl:someValuesFrom :MartialArtSportScoringSystem
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :determinedBy ;
+                                owl:someValuesFrom :Termination
+                              ] ;
+              rdfs:comment "The end result of some martial art execution which has been terminated."@en ;
+              rdfs:label "Fight Outcome"@en ;
+              skos:altLabel "Fight Result"@en ;
+              skos:prefLabel "Fight Outcome"@en .
+
+
+###  http://Psychobagger.github.io/umao#FightTerminationRule
+:FightTerminationRule rdf:type owl:Class ;
+                      rdfs:subClassOf :MartialArtRule ;
+                      rdfs:comment "A rule which provides guidelines for a termination of some martial art execution."@en ;
+                      rdfs:label "Fight Termination Rule"@en ;
+                      skos:prefLabel "Fight Termination Rule"@en .
+
+
+###  http://Psychobagger.github.io/umao#Finger
+:Finger rdf:type owl:Class ;
+        rdfs:subClassOf :HoldingTargetBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#FingerStrike
+:FingerStrike rdf:type owl:Class ;
+              rdfs:subClassOf :Strike ;
+              rdfs:comment "A martial art technique which strikes with some finger."@en ;
+              rdfs:label "Finger Strike"@en ;
+              skos:prefLabel "Finger Strike"@en .
+
+
+###  http://Psychobagger.github.io/umao#FirearmFocusedMartialArt
+:FirearmFocusedMartialArt rdf:type owl:Class ;
+                          rdfs:subClassOf :RangedWeaponsFocusedMartialArt .
+
+
+###  http://Psychobagger.github.io/umao#FistStrike
+:FistStrike rdf:type owl:Class ;
+            owl:equivalentClass :PunchStrike ;
+            rdfs:subClassOf :Strike .
+
+
+###  http://Psychobagger.github.io/umao#Flight
+:Flight rdf:type owl:Class ;
+        rdfs:subClassOf :Termination ;
+        rdfs:comment "An end of some martial art execution where some martial art agent flees."@en ;
+        rdfs:label "Flight"@en ;
+        skos:altLabel "Runaway"@en ;
+        skos:prefLabel "Flight"@en .
+
+
+###  http://Psychobagger.github.io/umao#Flinch
+:Flinch rdf:type owl:Class ;
+        rdfs:subClassOf :UnarmedMentalDisturbanceTechnique .
+
+
+###  http://Psychobagger.github.io/umao#FloorEquipment
+:FloorEquipment rdf:type owl:Class ;
+                rdfs:subClassOf :EnvironmentEquipment .
+
+
+###  http://Psychobagger.github.io/umao#FluidStance
+:FluidStance rdf:type owl:Class ;
+             rdfs:subClassOf :MartialArtStance .
+
+
+###  http://Psychobagger.github.io/umao#Foot
+:Foot rdf:type owl:Class ;
+      rdfs:subClassOf :HoldingTargetBodyPart ,
+                      :StrikingTargetBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#FootKickingFocusedMartialArt
+:FootKickingFocusedMartialArt rdf:type owl:Class ;
+                              rdfs:subClassOf :KickingFocusedMartialArt ;
+                              rdfs:comment "A martial art which focuses on kicking with the feet."@en .
+
+
+###  http://Psychobagger.github.io/umao#FootPositionShift
+:FootPositionShift rdf:type owl:Class ;
+                   rdfs:subClassOf :TelegraphedAction .
+
+
+###  http://Psychobagger.github.io/umao#FootStrike
+:FootStrike rdf:type owl:Class ;
+            rdfs:subClassOf :KickStrike .
+
+
+###  http://Psychobagger.github.io/umao#Forearm
+:Forearm rdf:type owl:Class ;
+         rdfs:subClassOf :HoldingTargetBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#FrontKick
+:FrontKick rdf:type owl:Class ;
+           rdfs:subClassOf :KickStrike .
+
+
+###  http://Psychobagger.github.io/umao#Glove
+:Glove rdf:type owl:Class ;
+       rdfs:subClassOf :HandEquipment .
+
+
+###  http://Psychobagger.github.io/umao#Gouging
+:Gouging rdf:type owl:Class ;
+         rdfs:subClassOf :DirtyTechnique ,
+                         [ rdf:type owl:Class ;
+                           owl:unionOf ( [ rdf:type owl:Restriction ;
+                                           owl:onProperty :performedBy ;
+                                           owl:someValuesFrom :Elbow
+                                         ]
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :performedBy ;
+                                           owl:someValuesFrom :Finger
+                                         ]
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :performedBy ;
+                                           owl:someValuesFrom :Hand
+                                         ]
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :performedBy ;
+                                           owl:someValuesFrom :Head
+                                         ]
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :performedBy ;
+                                           owl:someValuesFrom :Knee
+                                         ]
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :performedBy ;
+                                           owl:someValuesFrom :Shoulder
+                                         ]
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :performedBy ;
+                                           owl:someValuesFrom :Toe
+                                         ]
+                                       )
+                         ] ;
+         rdfs:comment "A martial art technique in which some part of some opponent's body is gouged with a part of some attacker's body."@en ;
+         rdfs:label "Gouging"@en ;
+         skos:prefLabel "Gouging"@en .
+
+
+###  http://Psychobagger.github.io/umao#GrapplingFocusedMartialArt
+:GrapplingFocusedMartialArt rdf:type owl:Class ;
+                            rdfs:subClassOf :HoldingFocusedMartialArt .
+
+
+###  http://Psychobagger.github.io/umao#Groin
+:Groin rdf:type owl:Class ;
+       rdfs:subClassOf :StrikingTargetBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#GroinEquipment
+:GroinEquipment rdf:type owl:Class ;
+                rdfs:subClassOf :LowerBodyEquipment .
+
+
+###  http://Psychobagger.github.io/umao#Gymnasium
+:Gymnasium rdf:type owl:Class ;
+           rdfs:subClassOf :RegulatedPlace .
+
+
+###  http://Psychobagger.github.io/umao#Hair
+:Hair rdf:type owl:Class ;
+      rdfs:subClassOf :HoldingTargetBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#Hammerfist
+:Hammerfist rdf:type owl:Class ;
+            rdfs:subClassOf :PunchStrike .
+
+
+###  http://Psychobagger.github.io/umao#Hand
+:Hand rdf:type owl:Class ;
+      rdfs:subClassOf :HoldingTargetBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#HandEquipment
+:HandEquipment rdf:type owl:Class ;
+               rdfs:subClassOf :ArmEquipment .
+
+
+###  http://Psychobagger.github.io/umao#HandPositionShift
+:HandPositionShift rdf:type owl:Class ;
+                   rdfs:subClassOf :TelegraphedAction .
+
+
+###  http://Psychobagger.github.io/umao#HandThrow
+:HandThrow rdf:type owl:Class ;
+           rdfs:subClassOf :Throw .
+
+
+###  http://Psychobagger.github.io/umao#Head
+:Head rdf:type owl:Class ;
+      rdfs:subClassOf :HoldingTargetBodyPart ,
+                      :SelfBodyPart ,
+                      :StrikingTargetBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#HeadEquipment
+:HeadEquipment rdf:type owl:Class ;
+               rdfs:subClassOf :WornEquipment .
+
+
+###  http://Psychobagger.github.io/umao#HeadStrike
+:HeadStrike rdf:type owl:Class ;
+            rdfs:subClassOf :Strike ;
+            rdfs:comment "A martial art technique which strikes with the head."@en ;
+            rdfs:label "Head Strike"@en ;
+            skos:prefLabel "Head Strike"@en .
+
+
+###  http://Psychobagger.github.io/umao#HealthFocusedMartialArt
+:HealthFocusedMartialArt rdf:type owl:Class ;
+                         rdfs:subClassOf :MartialArt ;
+                         rdfs:comment "A martial art which focuses on bodily health."@en ;
+                         rdfs:label "Health Focused Martial Art"@en ;
+                         skos:altLabel "Exercising Martial Art"@en ;
+                         skos:prefLabel "Health Focused Martial Art"@en .
+
+
+###  http://Psychobagger.github.io/umao#HeightAdvantageTechnique
+:HeightAdvantageTechnique rdf:type owl:Class ;
+                          rdfs:subClassOf :BodyAdvantageTechnique .
+
+
+###  http://Psychobagger.github.io/umao#Helmet
+:Helmet rdf:type owl:Class ;
+        rdfs:subClassOf :HeadEquipment .
+
+
+###  http://Psychobagger.github.io/umao#HighKickingFocusedMartialArt
+:HighKickingFocusedMartialArt rdf:type owl:Class ;
+                              rdfs:subClassOf :KickingFocusedMartialArt ;
+                              rdfs:comment "A martial art which focuses on kicking high on an opponents body."@en .
+
+
+###  http://Psychobagger.github.io/umao#HighestMartialArtGoverningBody
+:HighestMartialArtGoverningBody rdf:type owl:Class ;
+                                rdfs:subClassOf :MartialArtGoverningBody ;
+                                rdfs:comment "The highest and most reputable entity which provides oversight for some martial art."@en ;
+                                rdfs:label "Highest Martial Art Governing Body"@en ;
+                                skos:prefLabel "Highest Martial Art Governing Body"@en .
+
+
+###  http://Psychobagger.github.io/umao#HipThrow
+:HipThrow rdf:type owl:Class ;
+          rdfs:subClassOf :Throw .
+
+
+###  http://Psychobagger.github.io/umao#Hold
+:Hold rdf:type owl:Class ;
+      rdfs:subClassOf :AdvancingTechnique .
+
+
+###  http://Psychobagger.github.io/umao#HoldingFocusedMartialArt
+:HoldingFocusedMartialArt rdf:type owl:Class ;
+                          rdfs:subClassOf :BodyFocusedMartialArt .
+
+
+###  http://Psychobagger.github.io/umao#HoldingTargetBodyPart
+:HoldingTargetBodyPart rdf:type owl:Class ;
+                       rdfs:subClassOf :TargetBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#HomeGymnasium
+:HomeGymnasium rdf:type owl:Class ;
+               rdfs:subClassOf :UnregulatedPlace .
+
+
+###  http://Psychobagger.github.io/umao#Hook
+:Hook rdf:type owl:Class ;
+      rdfs:subClassOf :PunchStrike .
+
+
+###  http://Psychobagger.github.io/umao#ImprovisedWeaponsFocusedMartialArt
+:ImprovisedWeaponsFocusedMartialArt rdf:type owl:Class ;
+                                    rdfs:subClassOf :WeaponsFocusedMartialArt .
+
+
+###  http://Psychobagger.github.io/umao#Incapacitation
+:Incapacitation rdf:type owl:Class ;
+                rdfs:subClassOf :Knockout ;
+                rdfs:comment "An end of some martial art execution where some martial art agent is incapacitated."@en ;
+                rdfs:label "Incapacitation"@en ;
+                skos:altLabel "Laid Out"@en ;
+                skos:prefLabel "Incapacitation"@en .
+
+
+###  http://Psychobagger.github.io/umao#IndividualSport
+:IndividualSport rdf:type owl:Class ;
+                 rdfs:subClassOf :MartialArtSport .
+
+
+###  http://Psychobagger.github.io/umao#IndividualTeamSport
+:IndividualTeamSport rdf:type owl:Class ;
+                     rdfs:subClassOf :TeamSport .
+
+
+###  http://Psychobagger.github.io/umao#Initiation
+:Initiation rdf:type owl:Class ;
+            rdfs:subClassOf :FightComponent ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :begins ;
+                              owl:someValuesFrom :MartialArtExecution
+                            ] ;
+            rdfs:comment "A beginning of some martial art execution."@en ;
+            rdfs:label "Initiation"@en ;
+            skos:prefLabel "Initiation"@en .
+
+
+###  http://Psychobagger.github.io/umao#Jab
+:Jab rdf:type owl:Class ;
+     rdfs:subClassOf :PunchStrike ,
+                     [ rdf:type owl:Restriction ;
+                       owl:onProperty :performedBy ;
+                       owl:allValuesFrom :LeadHand
+                     ] ;
+     rdfs:comment "A punch strike performed with the leading fist driven straight forward."@en .
+
+
+###  http://Psychobagger.github.io/umao#JointInjury
+:JointInjury rdf:type owl:Class ;
+             rdfs:subClassOf :BodyPartInjury ;
+             rdfs:comment "An end of some martial art execution where some martial art agent is technically knocked out due to an injury to some joint."@en ;
+             rdfs:label "Joint Injury"@en ;
+             skos:prefLabel "Joint Injury"@en .
+
+
+###  http://Psychobagger.github.io/umao#JointManipulationFocusedMartialArt
+:JointManipulationFocusedMartialArt rdf:type owl:Class ;
+                                    rdfs:subClassOf :HoldingFocusedMartialArt ;
+                                    rdfs:comment "A martial art which focuses on the manipulation of body joints."@en .
+
+
+###  http://Psychobagger.github.io/umao#KickStrike
+:KickStrike rdf:type owl:Class ;
+            owl:equivalentClass :LegStrike ;
+            rdfs:subClassOf :Strike ;
+            rdfs:comment "A martial art technique which strikes with some part of some leg."@en ;
+            rdfs:label "Kick Strike"@en ;
+            skos:prefLabel "Kick Strike"@en .
+
+
+###  http://Psychobagger.github.io/umao#KickingFocusedMartialArt
+:KickingFocusedMartialArt rdf:type owl:Class ;
+                          rdfs:subClassOf :StrikingFocusedMartialArt ;
+                          rdfs:comment "A martial art which focuses on kicking with some part of the legs with some preference of target location."@en .
+
+
+###  http://Psychobagger.github.io/umao#Knee
+:Knee rdf:type owl:Class ;
+      rdfs:subClassOf :StrikingTargetBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#KneeLock
+:KneeLock rdf:type owl:Class ;
+          rdfs:subClassOf :Lock ;
+          rdfs:comment "A martial art technique in which some knee of some opponent is locked by some attacker."@en ;
+          rdfs:label "Knee Lock"@en ;
+          skos:prefLabel "Knee Lock"@en .
+
+
+###  http://Psychobagger.github.io/umao#KneeStrike
+:KneeStrike rdf:type owl:Class ;
+            rdfs:subClassOf :Strike ;
+            rdfs:comment "A martial art technique which strikes with some knee."@en ;
+            rdfs:label "Knee Strike"@en ;
+            skos:prefLabel "Knee Strike"@en .
+
+
+###  http://Psychobagger.github.io/umao#Knockout
+:Knockout rdf:type owl:Class ;
+          rdfs:subClassOf :Termination ;
+          rdfs:comment "An end of some martial art execution where some martial art agent is knocked out in some way."@en ;
+          rdfs:label "Knockout"@en ;
+          skos:altLabel "K.O."@en ,
+                        "KO"@en ,
+                        "Kayo"@en ;
+          skos:prefLabel "Knockout"@en .
+
+
+###  http://Psychobagger.github.io/umao#LargeBuildingSportingEvent
+:LargeBuildingSportingEvent rdf:type owl:Class ;
+                            rdfs:subClassOf :SportingEvent .
+
+
+###  http://Psychobagger.github.io/umao#LateralStance
+:LateralStance rdf:type owl:Class ;
+               rdfs:subClassOf :MartialArtStance .
+
+
+###  http://Psychobagger.github.io/umao#LateralStep
+:LateralStep rdf:type owl:Class ;
+             rdfs:subClassOf :RepositioningTechnique ,
+                             :UnarmedDefendingTechnique .
+
+
+###  http://Psychobagger.github.io/umao#LeadElbow
+:LeadElbow rdf:type owl:Class ;
+           rdfs:subClassOf :Elbow ,
+                           :LeadSideBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#LeadFist
+:LeadFist rdf:type owl:Class ;
+          rdfs:subClassOf :LeadHand .
+
+
+###  http://Psychobagger.github.io/umao#LeadFoot
+:LeadFoot rdf:type owl:Class ;
+          rdfs:subClassOf :Foot ,
+                          :LeadSideBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#LeadHand
+:LeadHand rdf:type owl:Class ;
+          rdfs:subClassOf :Hand ,
+                          :LeadSideBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#LeadHeel
+:LeadHeel rdf:type owl:Class ;
+          rdfs:subClassOf :LeadSideBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#LeadHip
+:LeadHip rdf:type owl:Class ;
+         rdfs:subClassOf :LeadSideBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#LeadKnee
+:LeadKnee rdf:type owl:Class ;
+          rdfs:subClassOf :LeadSideBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#LeadPalm
+:LeadPalm rdf:type owl:Class ;
+          rdfs:subClassOf :LeadHand .
+
+
+###  http://Psychobagger.github.io/umao#LeadShin
+:LeadShin rdf:type owl:Class ;
+          rdfs:subClassOf :LeadSideBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#LeadShoulder
+:LeadShoulder rdf:type owl:Class ;
+              rdfs:subClassOf :LeadSideBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#LeadSideBodyPart
+:LeadSideBodyPart rdf:type owl:Class ;
+                  rdfs:subClassOf :SelfBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#LegLock
+:LegLock rdf:type owl:Class ;
+         rdfs:subClassOf :Lock ;
+         rdfs:comment "A martial art technique in which some leg of some opponent is locked by some attacker."@en ;
+         rdfs:label "Leg Lock"@en ;
+         skos:prefLabel "Leg Lock"@en .
+
+
+###  http://Psychobagger.github.io/umao#LegStrike
+:LegStrike rdf:type owl:Class ;
+           rdfs:subClassOf :Strike .
+
+
+###  http://Psychobagger.github.io/umao#LegThrow
+:LegThrow rdf:type owl:Class ;
+          rdfs:subClassOf :Throw .
+
+
+###  http://Psychobagger.github.io/umao#LegTrip
+:LegTrip rdf:type owl:Class ;
+         rdfs:subClassOf :Trip .
+
+
+###  http://Psychobagger.github.io/umao#Lock
+:Lock rdf:type owl:Class ;
+      rdfs:subClassOf :UnarmedAttackingTechnique ;
+      rdfs:comment "A martial art technique in which some part of some opponent's body is locked, or bound, by some attacker, such that manipulation of the body can be performed for the purpose of attaining a submission (e.g. a choke)."@en ;
+      rdfs:label "Lock"@en ;
+      skos:prefLabel "Lock"@en .
+
+
+###  http://Psychobagger.github.io/umao#Loss
+:Loss rdf:type owl:Class ;
+      rdfs:subClassOf :FightOutcome ;
+      rdfs:comment "The outcome of some martial art agent who is defeated in some martial art execution."@en ;
+      rdfs:label "Loss"@en ;
+      skos:altLabel "Defeat"@en ,
+                    "Failure"@en ;
+      skos:prefLabel "Loss"@en .
+
+
+###  http://Psychobagger.github.io/umao#LowKickingFocusedMartialArt
+:LowKickingFocusedMartialArt rdf:type owl:Class ;
+                             rdfs:subClassOf :KickingFocusedMartialArt ;
+                             rdfs:comment "A martial art which focuses on kicking low on an opponents body."@en .
+
+
+###  http://Psychobagger.github.io/umao#LowerBodyEquipment
+:LowerBodyEquipment rdf:type owl:Class ;
+                    rdfs:subClassOf :WornEquipment .
+
+
+###  http://Psychobagger.github.io/umao#ManyManFight
+:ManyManFight rdf:type owl:Class ;
+              rdfs:subClassOf :MultipleAgentFight ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :hasNumberOfMartialArtCombatants ;
+                                owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                owl:onDataRange xsd:integer
+                              ] ;
+              rdfs:comment "A fight which involves more than two martial art agents."@en ;
+              rdfs:label "Many Man Fight"@en ;
+              skos:prefLabel "Many Man Fight"@en .
+
+
+###  http://Psychobagger.github.io/umao#MartialArt
+:MartialArt rdf:type owl:Class ;
+            rdfs:subClassOf <http://schema.org/ExercisePlan> ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :practicedBy ;
+                              owl:someValuesFrom :MartialArtAgent
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :rulesEnforcedBy ;
+                              owl:someValuesFrom :MartialArtGoverningBody
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :boundBy ;
+                              owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                              owl:onClass :MartialArtRule
+                            ] ;
+            rdfs:comment "A codified system of combat."@en ;
+            rdfs:isDefinedBy "http://PR0CK0.github.io/umao/"@en ;
+            rdfs:label "Martial Art"@en ;
+            skos:altLabel "Combat System"@en ,
+                          "Combat Tradition"@en ,
+                          "Fighting Art"@en ,
+                          "Fighting System"@en ;
+            skos:prefLabel "Martial Art"@en .
+
+
+###  http://Psychobagger.github.io/umao#MartialArtAgent
+:MartialArtAgent rdf:type owl:Class ;
+                 rdfs:subClassOf <http://schema.org/Person> ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :engagesIn ;
+                                   owl:someValuesFrom :MartialArtExecution
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :learnsBy ;
+                                   owl:someValuesFrom :MartialArtTraining
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :practices ;
+                                   owl:someValuesFrom :MartialArt
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :uses ;
+                                   owl:someValuesFrom :MartialArtEquipment
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :uses ;
+                                   owl:someValuesFrom :MartialArtStance
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :uses ;
+                                   owl:someValuesFrom :MartialArtTechnique
+                                 ] ;
+                 rdfs:comment "A human who participates in some martial art in some form."@en ;
+                 rdfs:isDefinedBy "http://PR0CK0.github.io/umao/"@en ;
+                 rdfs:label "Martial Art Agent"@en ;
+                 skos:altLabel "Martial Art Participant"@en ;
+                 skos:prefLabel "Martial Art Agent"@en .
+
+
+###  http://Psychobagger.github.io/umao#MartialArtCombatant
+:MartialArtCombatant rdf:type owl:Class ;
+                     rdfs:subClassOf :MartialArtAgent ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :engagesIn ;
+                                       owl:someValuesFrom :MartialArtFighting
+                                     ] ;
+                     rdfs:comment "A martial art agent who participates in a martial art execution by engaging in combat with at least one other martial art agent."@en .
+
+
+###  http://Psychobagger.github.io/umao#MartialArtEquipment
+:MartialArtEquipment rdf:type owl:Class ;
+                     rdfs:subClassOf <http://schema.org/Product> ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :affects ;
+                                       owl:someValuesFrom :MartialArtTechnique
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :usedBy ;
+                                       owl:someValuesFrom :MartialArtAgent
+                                     ] ;
+                     rdfs:comment "An article equipped by or interfaced with by some martial art agent who participates in some martial art execution."@en ;
+                     rdfs:isDefinedBy "http://PR0CK0.github.io/umao/"@en ;
+                     rdfs:label "Martial Art Equipment"@en ;
+                     skos:altLabel "Martial Art Gear"@en ;
+                     skos:prefLabel "Martial Art Equipment"@en .
+
+
+###  http://Psychobagger.github.io/umao#MartialArtExecution
+:MartialArtExecution rdf:type owl:Class ;
+                     rdfs:subClassOf <http://schema.org/InteractAction> ,
+                                     <http://schema.org/PlayAction> ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :beginsWith ;
+                                       owl:someValuesFrom :Initiation
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :composedOf ;
+                                       owl:someValuesFrom :MartialArtTechnique
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :endsWith ;
+                                       owl:someValuesFrom :Termination
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :engagedBy ;
+                                       owl:someValuesFrom :MartialArtAgent
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :takesPlaceIn ;
+                                       owl:someValuesFrom :MartialArtExecutionPlace
+                                     ] ;
+                     rdfs:comment "A physical execution of some form of martial art performed by some martial art agent."@en ;
+                     rdfs:isDefinedBy "http://PR0CK0.github.io/umao/"@en ;
+                     rdfs:label "Martial Art Execution"@en ;
+                     skos:altLabel "Martial Art Demonstration"@en ,
+                                   "Martial Art Display"@en ;
+                     skos:prefLabel "Martial Art Execution"@en .
+
+
+###  http://Psychobagger.github.io/umao#MartialArtExecutionPlace
+:MartialArtExecutionPlace rdf:type owl:Class ;
+                          rdfs:subClassOf <http://schema.org/Place> ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty :hosts ;
+                                            owl:someValuesFrom :MartialArtExecution
+                                          ] ;
+                          rdfs:comment "A physical location where some martial art execution takes place."@en ;
+                          rdfs:isDefinedBy "http://PR0CK0.github.io/umao/"@en ;
+                          rdfs:label "Martial Art Execution Place"@en ;
+                          skos:altLabel "Combat Place"@en ,
+                                        "Fight Place"@en ,
+                                        "Martial Art Performance Place"@en ;
+                          skos:prefLabel "Martial Art Execution Place"@en .
+
+
+###  http://Psychobagger.github.io/umao#MartialArtFighting
+:MartialArtFighting rdf:type owl:Class ;
+                    rdfs:subClassOf :MartialArtExecution ,
+                                    <http://schema.org/AchieveAction> ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :engagesIn ;
+                                      owl:someValuesFrom :MartialArtFighting
+                                    ] .
+
+
+###  http://Psychobagger.github.io/umao#MartialArtGoverningBody
+:MartialArtGoverningBody rdf:type owl:Class ;
+                         rdfs:subClassOf <http://schema.org/SportsOrganization> ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :enforcesRulesOn ;
+                                           owl:someValuesFrom :MartialArt
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :enforcesRulesOn ;
+                                           owl:someValuesFrom :MartialArtSport
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :prescribes ;
+                                           owl:someValuesFrom :MartialArtSportRankingSystem
+                                         ] ;
+                         rdfs:comment "An entity which provides oversight for some martial art."@en ;
+                         rdfs:isDefinedBy "http://PR0CK0.github.io/umao/"@en ;
+                         rdfs:label "Martial Art Governing Body"@en ;
+                         skos:prefLabel "Martial Art Governing Body"@en .
+
+
+###  http://Psychobagger.github.io/umao#MartialArtInstructor
+:MartialArtInstructor rdf:type owl:Class ;
+                      owl:equivalentClass :MartialArtTeacher ;
+                      rdfs:subClassOf :MartialArtAgent ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty :engagesIn ;
+                                        owl:someValuesFrom :MartialArtTraining
+                                      ] ;
+                      rdfs:comment "A martial art agent who instructs other martial art agents in some martial art."@en .
+
+
+###  http://Psychobagger.github.io/umao#MartialArtJudge
+:MartialArtJudge rdf:type owl:Class ;
+                 rdfs:subClassOf :MartialArtAgent ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :engagesIn ;
+                                   owl:someValuesFrom :SportingFight
+                                 ] ;
+                 rdfs:comment "A martial art agent who adjudicates some martial art execution."@en .
+
+
+###  http://Psychobagger.github.io/umao#MartialArtMuscleAction
+:MartialArtMuscleAction rdf:type owl:Class ;
+                        rdfs:subClassOf <http://schema.org/Action> ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :precedes ;
+                                          owl:someValuesFrom :MartialArtTechnique
+                                        ] ;
+                        rdfs:comment "A movement of some muscle which precedes some martial art move."@en ;
+                        rdfs:label "Martial Art Muscle Action"@en ;
+                        skos:altLabel "Muscle Movement"@en ;
+                        skos:prefLabel "Martial Art Muscle Action"@en .
+
+
+###  http://Psychobagger.github.io/umao#MartialArtOpponent
+:MartialArtOpponent rdf:type owl:Class ;
+                    rdfs:subClassOf :MartialArtCombatant ;
+                    rdfs:comment "A martial art agent who is in combat with some other martial art agent."@en ;
+                    rdfs:label "Martial Art Opponent"@en ;
+                    skos:prefLabel "Martial Art Opponent"@en .
+
+
+###  http://Psychobagger.github.io/umao#MartialArtReferee
+:MartialArtReferee rdf:type owl:Class ;
+                   rdfs:subClassOf :MartialArtAgent ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty :engagesIn ;
+                                     owl:someValuesFrom :SportingFight
+                                   ] ;
+                   rdfs:comment "A martial art agent who observes some martial art execution closely for the purpose of deciding an outcome."@en .
+
+
+###  http://Psychobagger.github.io/umao#MartialArtRule
+:MartialArtRule rdf:type owl:Class ;
+                rdfs:subClassOf <http://schema.org/Intangible> ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty :binds ;
+                                  owl:someValuesFrom :MartialArt
+                                ] ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty :binds ;
+                                  owl:someValuesFrom :MartialArtSport
+                                ] ;
+                rdfs:comment "A rule which provides structure to some martial art and delineates it from other martial arts."@en ;
+                rdfs:label "Martial Art Rule"@en ;
+                skos:prefLabel "Martial Art Rule"@en .
+
+
+###  http://Psychobagger.github.io/umao#MartialArtSport
+:MartialArtSport rdf:type owl:Class ;
+                 rdfs:subClassOf <http://schema.org/Organization> ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :boundBy ;
+                                   owl:someValuesFrom :MartialArtRule
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :derivedFrom ;
+                                   owl:someValuesFrom :MartialArt
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :rulesEnforcedBy ;
+                                   owl:someValuesFrom :MartialArtGoverningBody
+                                 ] ;
+                 rdfs:comment "A martial art sport, or a sporting martial art, can be considered in one frame of mind as a subclass of martial art. However, in the frame of mind which this class is created, a martial art sport is something which is derived and popularized from the root martial art itself, and therefore the sport is considered to be a sibling class to martial art. Nevertheless, the two are heavily related."@en ,
+                              "A martial art which is sporting in nature."@en ;
+                 rdfs:label "Martial Art Sport"@en ;
+                 skos:altLabel "Competitive Martial Art"@en ,
+                               "Martial Art Competition"@en ;
+                 skos:prefLabel "Martial Art Sport"@en .
+
+
+###  http://Psychobagger.github.io/umao#MartialArtSportRankingSystem
+:MartialArtSportRankingSystem rdf:type owl:Class ;
+                              rdfs:subClassOf :MartialArtSportScoringSystem ;
+                              rdfs:comment "A system by which some martial art agent is ranked with respect to other martial art agents within a sporting martial art."@en ;
+                              rdfs:label "Martial Art Sport Ranking System"@en ;
+                              skos:prefLabel "Martial Art Sport Ranking System"@en .
+
+
+###  http://Psychobagger.github.io/umao#MartialArtSportScoringSystem
+:MartialArtSportScoringSystem rdf:type owl:Class ;
+                              rdfs:subClassOf <http://schema.org/Rating> ,
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty :determines ;
+                                                owl:someValuesFrom :FightOutcome
+                                              ] ,
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty :prescribedBy ;
+                                                owl:someValuesFrom :MartialArtGoverningBody
+                                              ] ;
+                              rdfs:comment "A system by which some martial art agent is scored against some opponent(s) to determine the outcome of some sporting martial art execution."@en ;
+                              rdfs:label "Martial Art Sport Scoring System"@en ;
+                              skos:prefLabel "Martial Art Sport Scoring System"@en .
+
+
+###  http://Psychobagger.github.io/umao#MartialArtStance
+:MartialArtStance rdf:type owl:Class ;
+                  rdfs:subClassOf <http://schema.org/SuperficialAnatomy> ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :subjects ;
+                                    owl:someValuesFrom :MartialArtTechnique
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :usedBy ;
+                                    owl:someValuesFrom :MartialArtAgent
+                                  ] ;
+                  rdfs:comment "A position which some martial art agent who participates in some martial art execution assumes at some point in time."@en ;
+                  rdfs:label "Martial Art Stance"@en ;
+                  skos:prefLabel "Martial Art Stance"@en .
+
+
+###  http://Psychobagger.github.io/umao#MartialArtStudent
+:MartialArtStudent rdf:type owl:Class ;
+                   rdfs:subClassOf :MartialArtAgent ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty :engagesIn ;
+                                     owl:someValuesFrom :MartialArtTraining
+                                   ] ;
+                   rdfs:comment "A martial art agent who learns some martial art."@en .
+
+
+###  http://Psychobagger.github.io/umao#MartialArtTeacher
+:MartialArtTeacher rdf:type owl:Class ;
+                   rdfs:subClassOf :MartialArtAgent .
+
+
+###  http://Psychobagger.github.io/umao#MartialArtTechnique
+:MartialArtTechnique rdf:type owl:Class ;
+                     rdfs:subClassOf <http://schema.org/PlayAction> ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :affectedBy ;
+                                       owl:someValuesFrom :MartialArtEquipment
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :affectedBy ;
+                                       owl:someValuesFrom :MidFightComponent
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :composes ;
+                                       owl:someValuesFrom :MartialArtExecution
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :mayResultIn ;
+                                       owl:someValuesFrom :Termination
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :performedBy ;
+                                       owl:someValuesFrom :BodyPart
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :precededBy ;
+                                       owl:someValuesFrom :MartialArtMuscleAction
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :prohibitedBy ;
+                                       owl:someValuesFrom :TechniqueRule
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :subjectTo ;
+                                       owl:someValuesFrom :MartialArtStance
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :usedBy ;
+                                       owl:someValuesFrom :MartialArtAgent
+                                     ] ;
+                     rdfs:comment "A technique or move employed by some martial art agent who participates in some martial art."@en ;
+                     rdfs:isDefinedBy "http://PR0CK0.github.io/umao/"@en ;
+                     rdfs:label "Martial Art Technique"@en ;
+                     skos:altLabel "Martial Art Move"@en ;
+                     skos:prefLabel "Martial Art Technique"@en .
+
+
+###  http://Psychobagger.github.io/umao#MartialArtTraining
+:MartialArtTraining rdf:type owl:Class ;
+                    rdfs:subClassOf :MartialArtExecution .
+
+
+###  http://Psychobagger.github.io/umao#MartialArtTrainingPlace
+:MartialArtTrainingPlace rdf:type owl:Class ;
+                         rdfs:subClassOf :RegulatedPlace ,
+                                         :UnregulatedPlace .
+
+
+###  http://Psychobagger.github.io/umao#MentalDisturbanceTechnique
+:MentalDisturbanceTechnique rdf:type owl:Class ;
+                            rdfs:subClassOf :MartialArtTechnique .
+
+
+###  http://Psychobagger.github.io/umao#MidFightComponent
+:MidFightComponent rdf:type owl:Class ;
+                   rdfs:subClassOf :FightComponent ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty :affects ;
+                                     owl:someValuesFrom :MartialArtTechnique
+                                   ] ;
+                   rdfs:comment "A component of some martial art execution which is occuring."@en ;
+                   rdfs:label "Mid Fight Component"@en .
+
+
+###  http://Psychobagger.github.io/umao#MiscellaneousEquipment
+:MiscellaneousEquipment rdf:type owl:Class ;
+                        rdfs:subClassOf :MartialArtEquipment .
+
+
+###  http://Psychobagger.github.io/umao#MixedMartialArt
+:MixedMartialArt rdf:type owl:Class ;
+                 rdfs:subClassOf :BodyFocusedMartialArt ;
+                 rdfs:comment "A martial art which incorporates several different martial art focuses, such that it is less restrictive."@en ;
+                 rdfs:label "Mixed Martial Art"@en ;
+                 skos:altLabel "Hybrid Focused Martial Art"@en ;
+                 skos:prefLabel "Mixed Martial Art"@en .
+
+
+###  http://Psychobagger.github.io/umao#Mouth
+:Mouth rdf:type owl:Class ;
+       rdfs:subClassOf :StrikingTargetBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#MouthMovement
+:MouthMovement rdf:type owl:Class ;
+               rdfs:subClassOf :TelegraphedAction .
+
+
+###  http://Psychobagger.github.io/umao#Mouthguard
+:Mouthguard rdf:type owl:Class ;
+            rdfs:subClassOf :HeadEquipment .
+
+
+###  http://Psychobagger.github.io/umao#MovingTarget
+:MovingTarget rdf:type owl:Class ;
+              rdfs:subClassOf :Target .
+
+
+###  http://Psychobagger.github.io/umao#MultipleAgentFight
+:MultipleAgentFight rdf:type owl:Class ;
+                    rdfs:subClassOf :MartialArtFighting ;
+                    rdfs:comment "A fight which involves at least two martial art agents."@en ;
+                    rdfs:label "Multiple Agent Fight"@en ;
+                    skos:prefLabel "Multiple Agent Fight"@en .
+
+
+###  http://Psychobagger.github.io/umao#MutualInitiation
+:MutualInitiation rdf:type owl:Class ;
+                  rdfs:subClassOf :PlannedInitiation ;
+                  rdfs:comment "A beginning of some martial art execution which is anticipated and planned by more than one martial art agent."@en ;
+                  rdfs:label "Mutual Initiation"@en ;
+                  skos:prefLabel "Mutual Initiation"@en .
+
+
+###  http://Psychobagger.github.io/umao#Neck
+:Neck rdf:type owl:Class ;
+      rdfs:subClassOf :HoldingTargetBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#Nose
+:Nose rdf:type owl:Class ;
+      rdfs:subClassOf :StrikingTargetBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#ObjectUtilization
+:ObjectUtilization rdf:type owl:Class ;
+                   rdfs:subClassOf :ArmedFightingTechnique ,
+                                   :EnvironmentUsageTechnique .
+
+
+###  http://Psychobagger.github.io/umao#OlympicSportingEvent
+:OlympicSportingEvent rdf:type owl:Class ;
+                      rdfs:subClassOf :LargeBuildingSportingEvent .
+
+
+###  http://Psychobagger.github.io/umao#OpenHandedStrike
+:OpenHandedStrike rdf:type owl:Class ;
+                  rdfs:subClassOf :Strike ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :performedBy ;
+                                    owl:allValuesFrom [ rdf:type owl:Class ;
+                                                        owl:unionOf ( :LeadHand
+                                                                      :RearHand
+                                                                    )
+                                                      ]
+                                  ] ;
+                  rdfs:comment "A martial art technique which strikes with some open hand."@en ;
+                  rdfs:label "Open Handed Strike"@en ;
+                  skos:altLabel "Slap"@en ;
+                  skos:prefLabel "Open Handed Strike"@en .
+
+
+###  http://Psychobagger.github.io/umao#Pacing
+:Pacing rdf:type owl:Class ;
+        rdfs:subClassOf :MidFightComponent .
+
+
+###  http://Psychobagger.github.io/umao#PalmStrike
+:PalmStrike rdf:type owl:Class ;
+            rdfs:subClassOf :OpenHandedStrike ;
+            rdfs:comment "A martial art technique which strikes forward with the palm of some hand, similar to a jab punch."@en ;
+            rdfs:label "Palm Strike"@en ;
+            skos:prefLabel "Palm Strike"@en .
+
+
+###  http://Psychobagger.github.io/umao#Parry
+:Parry rdf:type owl:Class ;
+       rdfs:subClassOf :UnarmedDefendingTechnique .
+
+
+###  http://Psychobagger.github.io/umao#PartnerDrilling
+:PartnerDrilling rdf:type owl:Class ;
+                 rdfs:subClassOf :Drilling .
+
+
+###  http://Psychobagger.github.io/umao#PerformanceFocusedMartialArt
+:PerformanceFocusedMartialArt rdf:type owl:Class ;
+                              rdfs:subClassOf :MartialArt ;
+                              rdfs:comment "A martial art which focuses on performance and entertainment."@en ;
+                              rdfs:label "Performance Focused Martial Art"@en ;
+                              skos:altLabel "Entertainment Martial Art"@en ;
+                              skos:prefLabel "Performance Focused Martial Art"@en .
+
+
+###  http://Psychobagger.github.io/umao#Pin
+:Pin rdf:type owl:Class ;
+     rdfs:subClassOf :AdvancingTechnique .
+
+
+###  http://Psychobagger.github.io/umao#PlannedInitiation
+:PlannedInitiation rdf:type owl:Class ;
+                   rdfs:subClassOf :Initiation ;
+                   rdfs:comment "A beginning of some martial art execution which is anticipated and planned."@en ;
+                   rdfs:label "Planned Initiation"@en ;
+                   skos:prefLabel "Planned Initiation"@en .
+
+
+###  http://Psychobagger.github.io/umao#PracticalityFocusedMartialArt
+:PracticalityFocusedMartialArt rdf:type owl:Class ;
+                               rdfs:subClassOf :MartialArt ;
+                               rdfs:comment "A martial art which focuses on combat practicality."@en ;
+                               rdfs:label "Practicality Focused Martial Art"@en ;
+                               skos:altLabel "Practical Martial Art"@en ,
+                                             "Real Martial Art"@en ;
+                               skos:prefLabel "Practicality Focused Martial Art"@en .
+
+
+###  http://Psychobagger.github.io/umao#PrimitiveRangedWeaponsFocusedMartialArt
+:PrimitiveRangedWeaponsFocusedMartialArt rdf:type owl:Class ;
+                                         rdfs:subClassOf :RangedWeaponsFocusedMartialArt .
+
+
+###  http://Psychobagger.github.io/umao#Pulling
+:Pulling rdf:type owl:Class ;
+         rdfs:subClassOf :DirtyTechnique ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :performedBy ;
+                           owl:someValuesFrom :Hand
+                         ] ;
+         rdfs:comment "A martial art technique in which some part of some opponent's body is pulled with some hand of some attacker."@en ;
+         rdfs:label "Pulling"@en ;
+         skos:prefLabel "Pulling"@en .
+
+
+###  http://Psychobagger.github.io/umao#PunchStrike
+:PunchStrike rdf:type owl:Class ;
+             rdfs:subClassOf :Strike ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :performedBy ;
+                               owl:allValuesFrom [ rdf:type owl:Class ;
+                                                   owl:unionOf ( :LeadFist
+                                                                 :RearFist
+                                                               )
+                                                 ]
+                             ] ;
+             rdfs:comment "A martial art technique which strikes with some balled hand, called a fist."@en ;
+             rdfs:label "Punch Strike"@en ;
+             skos:prefLabel "Punch Strike"@en .
+
+
+###  http://Psychobagger.github.io/umao#PunchingFocusedMartialArt
+:PunchingFocusedMartialArt rdf:type owl:Class ;
+                           rdfs:subClassOf :StrikingFocusedMartialArt ;
+                           rdfs:comment "A martial art which focuses on punching with the fists."@en .
+
+
+###  http://Psychobagger.github.io/umao#Push
+:Push rdf:type owl:Class ;
+      rdfs:subClassOf :RetreatingTechnique .
+
+
+###  http://Psychobagger.github.io/umao#RangedWeaponsFocusedMartialArt
+:RangedWeaponsFocusedMartialArt rdf:type owl:Class ;
+                                rdfs:subClassOf :WeaponsFocusedMartialArt .
+
+
+###  http://Psychobagger.github.io/umao#RealFight
+:RealFight rdf:type owl:Class ;
+           owl:equivalentClass :StreetFight ;
+           rdfs:subClassOf :MartialArtFighting .
+
+
+###  http://Psychobagger.github.io/umao#RearElbow
+:RearElbow rdf:type owl:Class ;
+           rdfs:subClassOf :Elbow ,
+                           :RearSideBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#RearFist
+:RearFist rdf:type owl:Class ;
+          rdfs:subClassOf :RearHand .
+
+
+###  http://Psychobagger.github.io/umao#RearFoot
+:RearFoot rdf:type owl:Class ;
+          rdfs:subClassOf :Foot ,
+                          :RearSideBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#RearHand
+:RearHand rdf:type owl:Class ;
+          rdfs:subClassOf :Hand ,
+                          :RearSideBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#RearHeel
+:RearHeel rdf:type owl:Class ;
+          rdfs:subClassOf :RearSideBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#RearHip
+:RearHip rdf:type owl:Class ;
+         rdfs:subClassOf :RearSideBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#RearKnee
+:RearKnee rdf:type owl:Class ;
+          rdfs:subClassOf :RearSideBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#RearPalm
+:RearPalm rdf:type owl:Class ;
+          rdfs:subClassOf :RearHand .
+
+
+###  http://Psychobagger.github.io/umao#RearShin
+:RearShin rdf:type owl:Class ;
+          rdfs:subClassOf :RearSideBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#RearShoulder
+:RearShoulder rdf:type owl:Class ;
+              rdfs:subClassOf :RearSideBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#RearSideBodyPart
+:RearSideBodyPart rdf:type owl:Class ;
+                  rdfs:subClassOf :SelfBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#RegulatedPlace
+:RegulatedPlace rdf:type owl:Class ;
+                rdfs:subClassOf :MartialArtExecutionPlace ;
+                rdfs:comment "A physical location where some martial art execution takes place and in which some regulation exists."@en ;
+                rdfs:label "Regulated Place"@en ;
+                skos:prefLabel "Regulated Place"@en .
+
+
+###  http://Psychobagger.github.io/umao#RepositioningTechnique
+:RepositioningTechnique rdf:type owl:Class ;
+                        rdfs:subClassOf :UnarmedPositioningTechnique .
+
+
+###  http://Psychobagger.github.io/umao#RetreatingTechnique
+:RetreatingTechnique rdf:type owl:Class ;
+                     rdfs:subClassOf :UnarmedPositioningTechnique .
+
+
+###  http://Psychobagger.github.io/umao#Rhythm
+:Rhythm rdf:type owl:Class ;
+        rdfs:subClassOf :MidFightComponent .
+
+
+###  http://Psychobagger.github.io/umao#Ribcage
+:Ribcage rdf:type owl:Class ;
+         rdfs:subClassOf :StrikingTargetBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#SelfBodyPart
+:SelfBodyPart rdf:type owl:Class ;
+              rdfs:subClassOf :BodyPart .
+
+
+###  http://Psychobagger.github.io/umao#Separation
+:Separation rdf:type owl:Class ;
+            rdfs:subClassOf :Termination ;
+            rdfs:comment "An end of some martial art execution where some martial art agent is separated by some means from some opponent."@en ;
+            rdfs:label "Separation"@en ;
+            skos:altLabel "Loss of Contact"@en ;
+            skos:prefLabel "Separation"@en .
+
+
+###  http://Psychobagger.github.io/umao#ShinKickingFocusedMartialArt
+:ShinKickingFocusedMartialArt rdf:type owl:Class ;
+                              rdfs:subClassOf :KickingFocusedMartialArt ;
+                              rdfs:comment "A martial art which focuses on kicking with the shins."@en .
+
+
+###  http://Psychobagger.github.io/umao#Shoe
+:Shoe rdf:type owl:Class ;
+      rdfs:subClassOf :LowerBodyEquipment .
+
+
+###  http://Psychobagger.github.io/umao#Shoulder
+:Shoulder rdf:type owl:Class ;
+          rdfs:subClassOf :HoldingTargetBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#ShoulderPositionShift
+:ShoulderPositionShift rdf:type owl:Class ;
+                       rdfs:subClassOf :TelegraphedAction .
+
+
+###  http://Psychobagger.github.io/umao#Shout
+:Shout rdf:type owl:Class ;
+       rdfs:subClassOf :Vocalization .
+
+
+###  http://Psychobagger.github.io/umao#SkillBasedRankingSystem
+:SkillBasedRankingSystem rdf:type owl:Class ;
+                         rdfs:subClassOf :MartialArtSportRankingSystem ;
+                         rdfs:comment "A system by which some martial art agent is ranked with respect to other martial art agents within a sporting martial art by way of skill."@en .
+
+
+###  http://Psychobagger.github.io/umao#Slap
+:Slap rdf:type owl:Class ;
+      rdfs:subClassOf :OpenHandedStrike ;
+      rdfs:comment "A martial art technique which strikes wide with the palm of some hand, similar to a hook punch."@en ;
+      rdfs:label "Slap"@en ;
+      skos:prefLabel "Slap"@en .
+
+
+###  http://Psychobagger.github.io/umao#SlappingFocusedMartialArt
+:SlappingFocusedMartialArt rdf:type owl:Class ;
+                           rdfs:subClassOf :StrikingFocusedMartialArt ;
+                           rdfs:comment "A martial art which focuses on slapping with the hands."@en .
+
+
+###  http://Psychobagger.github.io/umao#Slip
+:Slip rdf:type owl:Class ;
+      rdfs:subClassOf :UnarmedDefendingTechnique .
+
+
+###  http://Psychobagger.github.io/umao#SoloDrilling
+:SoloDrilling rdf:type owl:Class ;
+              rdfs:subClassOf :Drilling .
+
+
+###  http://Psychobagger.github.io/umao#Sparring
+:Sparring rdf:type owl:Class ;
+          owl:equivalentClass :TrainingFight ;
+          rdfs:subClassOf :SportingFight .
+
+
+###  http://Psychobagger.github.io/umao#SpeedAdvantageTechnique
+:SpeedAdvantageTechnique rdf:type owl:Class ;
+                         rdfs:subClassOf :BodyAdvantageTechnique .
+
+
+###  http://Psychobagger.github.io/umao#SpiritualityFocusedMartialArt
+:SpiritualityFocusedMartialArt rdf:type owl:Class ;
+                               rdfs:subClassOf :MartialArt ;
+                               rdfs:comment "A martial art which focuses on spirituality."@en ;
+                               rdfs:label "Spirituality Focused Martial Art"@en ;
+                               skos:prefLabel "Spirituality Focused Martial Art"@en .
+
+
+###  http://Psychobagger.github.io/umao#SportingEvent
+:SportingEvent rdf:type owl:Class ;
+               rdfs:subClassOf :RegulatedPlace .
+
+
+###  http://Psychobagger.github.io/umao#SportingFight
+:SportingFight rdf:type owl:Class ;
+               rdfs:subClassOf :MartialArtFighting .
+
+
+###  http://Psychobagger.github.io/umao#StadiumSportingEvent
+:StadiumSportingEvent rdf:type owl:Class ;
+                      rdfs:subClassOf :LargeBuildingSportingEvent .
+
+
+###  http://Psychobagger.github.io/umao#Stare
+:Stare rdf:type owl:Class ;
+       rdfs:subClassOf :UnarmedMentalDisturbanceTechnique .
+
+
+###  http://Psychobagger.github.io/umao#StationaryTarget
+:StationaryTarget rdf:type owl:Class ;
+                  rdfs:subClassOf :Target .
+
+
+###  http://Psychobagger.github.io/umao#StepIn
+:StepIn rdf:type owl:Class ;
+        rdfs:subClassOf :AdvancingTechnique ,
+                        :UnarmedDefendingTechnique .
+
+
+###  http://Psychobagger.github.io/umao#Stomach
+:Stomach rdf:type owl:Class ;
+         rdfs:subClassOf :StrikingTargetBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#StreetFight
+:StreetFight rdf:type owl:Class ;
+             rdfs:subClassOf :MartialArtFighting ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :takesPlaceIn ;
+                               owl:someValuesFrom :UnregulatedPlace
+                             ] .
+
+
+###  http://Psychobagger.github.io/umao#StrengthAdvantageTechnique
+:StrengthAdvantageTechnique rdf:type owl:Class ;
+                            rdfs:subClassOf :BodyAdvantageTechnique .
+
+
+###  http://Psychobagger.github.io/umao#Strike
+:Strike rdf:type owl:Class ;
+        rdfs:subClassOf :UnarmedAttackingTechnique ;
+        rdfs:comment "A martial art technique which strikes with some part of the body (e.g. a punch)."@en ;
+        rdfs:label "Strike"@en ;
+        skos:prefLabel "Strike"@en .
+
+
+###  http://Psychobagger.github.io/umao#StrikingFocusedMartialArt
+:StrikingFocusedMartialArt rdf:type owl:Class ;
+                           rdfs:subClassOf :BodyFocusedMartialArt ;
+                           rdfs:comment "A martial art which focuses on physical strikes."@en .
+
+
+###  http://Psychobagger.github.io/umao#StrikingTargetBodyPart
+:StrikingTargetBodyPart rdf:type owl:Class ;
+                        rdfs:subClassOf :TargetBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#Submission
+:Submission rdf:type owl:Class ;
+            rdfs:subClassOf :Termination ;
+            rdfs:comment "An end of some martial art execution where some martial art agent submits to some opponent."@en ;
+            rdfs:label "Submission"@en ;
+            skos:prefLabel "Submission"@en .
+
+
+###  http://Psychobagger.github.io/umao#SubordinateSideBackwardStance
+:SubordinateSideBackwardStance rdf:type owl:Class ;
+                               rdfs:subClassOf :MartialArtStance ;
+                               rdfs:comment "A position in which some martial art agent is found with their subordinate side farthest from some opponent."@en .
+
+
+###  http://Psychobagger.github.io/umao#SubordinateSideForwardStance
+:SubordinateSideForwardStance rdf:type owl:Class ;
+                              rdfs:subClassOf :MartialArtStance ;
+                              rdfs:comment "A position in which some martial art agent is found with their subordinate side closest to some opponent."@en .
+
+
+###  http://Psychobagger.github.io/umao#Sweep
+:Sweep rdf:type owl:Class ;
+       rdfs:subClassOf :LegTrip .
+
+
+###  http://Psychobagger.github.io/umao#Talk
+:Talk rdf:type owl:Class ;
+      rdfs:subClassOf :Vocalization .
+
+
+###  http://Psychobagger.github.io/umao#Target
+:Target rdf:type owl:Class ;
+        rdfs:subClassOf :TrainingEquipment .
+
+
+###  http://Psychobagger.github.io/umao#TargetBodyPart
+:TargetBodyPart rdf:type owl:Class ;
+                rdfs:subClassOf :BodyPart .
+
+
+###  http://Psychobagger.github.io/umao#TeamSport
+:TeamSport rdf:type owl:Class ;
+           rdfs:subClassOf :MartialArtSport .
+
+
+###  http://Psychobagger.github.io/umao#TechnicalKnockout
+:TechnicalKnockout rdf:type owl:Class ;
+                   rdfs:subClassOf :Knockout ;
+                   rdfs:comment "An end of some martial art execution where some martial art agent is technically knocked out in some way."@en ;
+                   rdfs:label "Technical Knockout"@en ;
+                   skos:altLabel "T.K.O"@en ,
+                                 "TKO"@en ;
+                   skos:prefLabel "Technical Knockout"@en .
+
+
+###  http://Psychobagger.github.io/umao#TechnicalSubmission
+:TechnicalSubmission rdf:type owl:Class ;
+                     rdfs:subClassOf :Submission ;
+                     rdfs:comment "An end of some martial art execution where some martial art agent is technically submitted to some opponent."@en ;
+                     rdfs:label "Technical Submission"@en ;
+                     skos:prefLabel "Technical Submission"@en .
+
+
+###  http://Psychobagger.github.io/umao#TechniqueRule
+:TechniqueRule rdf:type owl:Class ;
+               rdfs:subClassOf :MartialArtRule ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :prohibits ;
+                                 owl:someValuesFrom :MartialArtTechnique
+                               ] ;
+               rdfs:comment "A rule which provides guidelines for the techniques to be used in some martial art execution."@en ;
+               rdfs:label "Technique Rule"@en ;
+               skos:prefLabel "Technique Rule"@en .
+
+
+###  http://Psychobagger.github.io/umao#Teeth
+:Teeth rdf:type owl:Class ;
+       rdfs:subClassOf :SelfBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#TelegraphedAction
+:TelegraphedAction rdf:type owl:Class ;
+                   rdfs:subClassOf :MartialArtMuscleAction ;
+                   rdfs:comment "A muscle action which telegraphs, or portrays, to some onlooker (specifically, an opponent) that some martial art technique is about to occur."@en ;
+                   rdfs:label "Telegraphed Action"@en ;
+                   skos:prefLabel "Telegraphed Action"@en .
+
+
+###  http://Psychobagger.github.io/umao#TemporalDetermination
+:TemporalDetermination rdf:type owl:Class ;
+                       rdfs:subClassOf :Termination ;
+                       rdfs:comment "An end of some martial art execution where it is determined that no time is left for its completion."@en ;
+                       rdfs:label "Temporal Determination"@en ;
+                       skos:altLabel "Time Limit Decision"@en ;
+                       skos:prefLabel "Temporal Determination"@en .
+
+
+###  http://Psychobagger.github.io/umao#Termination
+:Termination rdf:type owl:Class ;
+             rdfs:subClassOf :FightComponent ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :ends ;
+                               owl:someValuesFrom :MartialArtExecution
+                             ] ;
+             rdfs:comment "An end of some martial art execution."@en ;
+             rdfs:label "Termination"@en ;
+             skos:prefLabel "Termination"@en .
+
+
+###  http://Psychobagger.github.io/umao#TerrainManipulationTechnique
+:TerrainManipulationTechnique rdf:type owl:Class ;
+                              rdfs:subClassOf :EnvironmentUsageTechnique .
+
+
+###  http://Psychobagger.github.io/umao#Thigh
+:Thigh rdf:type owl:Class ;
+       rdfs:subClassOf :HoldingTargetBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#ThighEquipment
+:ThighEquipment rdf:type owl:Class ;
+                rdfs:subClassOf :LowerBodyEquipment .
+
+
+###  http://Psychobagger.github.io/umao#Throat
+:Throat rdf:type owl:Class ;
+        rdfs:subClassOf :HoldingTargetBodyPart ,
+                        :StrikingTargetBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#Throw
+:Throw rdf:type owl:Class ;
+       rdfs:subClassOf :UnarmedAttackingTechnique ;
+       rdfs:comment "A martial art technique in which some opponent is thrown to the ground by some attacker."@en ;
+       rdfs:label "Throw"@en ;
+       skos:prefLabel "Throw"@en .
+
+
+###  http://Psychobagger.github.io/umao#ThrowingFocusedMartialArt
+:ThrowingFocusedMartialArt rdf:type owl:Class ;
+                           rdfs:subClassOf :HoldingFocusedMartialArt ;
+                           rdfs:comment "A martial art which focuses on the throwing of opponents to the ground."@en .
+
+
+###  http://Psychobagger.github.io/umao#Timing
+:Timing rdf:type owl:Class ;
+        rdfs:subClassOf :MidFightComponent .
+
+
+###  http://Psychobagger.github.io/umao#Toe
+:Toe rdf:type owl:Class ;
+     rdfs:subClassOf :HoldingTargetBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#TrainingEquipment
+:TrainingEquipment rdf:type owl:Class ;
+                   rdfs:subClassOf :MartialArtEquipment .
+
+
+###  http://Psychobagger.github.io/umao#TrainingFight
+:TrainingFight rdf:type owl:Class ;
+               rdfs:subClassOf :MartialArtTraining ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :takesPlaceIn ;
+                                 owl:someValuesFrom :MartialArtTrainingPlace
+                               ] .
+
+
+###  http://Psychobagger.github.io/umao#Trap
+:Trap rdf:type owl:Class ;
+      rdfs:subClassOf :AdvancingTechnique .
+
+
+###  http://Psychobagger.github.io/umao#Trip
+:Trip rdf:type owl:Class ;
+      rdfs:subClassOf :UnarmedAttackingTechnique ;
+      rdfs:comment "A martial art technique in which some opponent is tripped to the ground by some attacker."@en ;
+      rdfs:label "Trip"@en ;
+      skos:prefLabel "Trip"@en .
+
+
+###  http://Psychobagger.github.io/umao#TrueMixedMartialArt
+:TrueMixedMartialArt rdf:type owl:Class ;
+                     rdfs:subClassOf :PracticalityFocusedMartialArt ;
+                     rdfs:comment "A martial art which incorporates several different martial art focuses, including both body and weapon usage, such that it is not restrictive."@en ;
+                     rdfs:label "True Mixed Martial Art"@en ;
+                     skos:prefLabel "True Mixed Martial Art"@en .
+
+
+###  http://Psychobagger.github.io/umao#TwoManFight
+:TwoManFight rdf:type owl:Class ;
+             rdfs:subClassOf :MultipleAgentFight ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :hasNumberOfMartialArtCombatants ;
+                               owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                               owl:onDataRange xsd:integer
+                             ] ;
+             rdfs:comment "A fight which involves exactly two martial art agents."@en ;
+             rdfs:label "Two Man Fight"@en ;
+             skos:altLabel "One-on-One Fight"@en ;
+             skos:prefLabel "Two Man Fight"@en .
+
+
+###  http://Psychobagger.github.io/umao#UnarmedAttackingTechnique
+:UnarmedAttackingTechnique rdf:type owl:Class ;
+                           rdfs:subClassOf :UnarmedFightingTechnique ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty :opensUp ;
+                                             owl:someValuesFrom :TargetBodyPart
+                                           ] ;
+                           rdfs:comment "A martial art technique which seeks to physically injure an opponent while unarmed."@en ;
+                           rdfs:label "Unarmed Attacking Technique"@en ;
+                           skos:prefLabel "Unarmed Attacking Technique"@en .
+
+
+###  http://Psychobagger.github.io/umao#UnarmedDefendingTechnique
+:UnarmedDefendingTechnique rdf:type owl:Class ;
+                           rdfs:subClassOf :UnarmedFightingTechnique ;
+                           rdfs:comment "A martial art technique which seeks to prevent physical injury from some opponent while unarmed."@en ;
+                           rdfs:label "Unarmed Defending Technique"@en ;
+                           skos:prefLabel "Unarmed Defending Technique"@en .
+
+
+###  http://Psychobagger.github.io/umao#UnarmedFightingTechnique
+:UnarmedFightingTechnique rdf:type owl:Class ;
+                          rdfs:subClassOf :MartialArtTechnique ;
+                          rdfs:comment "A martial art technique which is performed with only parts of the human body."@en ;
+                          rdfs:label "Unarmed Fighting Technique"@en ;
+                          skos:prefLabel "Unarmed Fighting Technique"@en .
+
+
+###  http://Psychobagger.github.io/umao#UnarmedMartialArtCombatant
+:UnarmedMartialArtCombatant rdf:type owl:Class ;
+                            rdfs:subClassOf :MartialArtCombatant ;
+                            rdfs:comment "A martial art agent who is unarmed."@en ;
+                            rdfs:label "Unarmed Martial Art Combatant"@en ;
+                            skos:prefLabel "Unarmed Martial Art Combatant"@en .
+
+
+###  http://Psychobagger.github.io/umao#UnarmedMentalDisturbanceTechnique
+:UnarmedMentalDisturbanceTechnique rdf:type owl:Class ;
+                                   rdfs:subClassOf :MentalDisturbanceTechnique ,
+                                                   :UnarmedFightingTechnique ;
+                                   rdfs:comment "A martial art technique which seeks to mentally disturb an opponent and thereby gain a mental advantage while unarmed."@en ;
+                                   rdfs:label "Unarmed Mental Disturbance Technique"@en ;
+                                   skos:altLabel "Unarmed Confusing Technique"@en ,
+                                                 "Unarmed Demoralizing Technique"@en ,
+                                                 "Unarmed Distracting Technique"@en ;
+                                   skos:prefLabel "Unarmed Mental Disturbance Technique"@en .
+
+
+###  http://Psychobagger.github.io/umao#UnarmedPositioningTechnique
+:UnarmedPositioningTechnique rdf:type owl:Class ;
+                             rdfs:subClassOf :UnarmedFightingTechnique ;
+                             rdfs:comment "A martial art technique which seeks to change physical position while unarmed."@en ;
+                             rdfs:label "Unarmed Positioning Technique"@en ;
+                             skos:prefLabel "Unarmed Positioning Technique"@en .
+
+
+###  http://Psychobagger.github.io/umao#UnexpectedInitiation
+:UnexpectedInitiation rdf:type owl:Class ;
+                      rdfs:subClassOf :Initiation ;
+                      rdfs:comment "An initiation of some martial art execution which is unanticipated."@en ;
+                      rdfs:label "Unexpected Initiation"@en ;
+                      skos:altLabel "Unplanned Initiation" ;
+                      skos:prefLabel "Unexpected Initiation"@en .
+
+
+###  http://Psychobagger.github.io/umao#Uniform
+:Uniform rdf:type owl:Class ;
+         rdfs:subClassOf :TrainingEquipment ,
+                         :WornEquipment .
+
+
+###  http://Psychobagger.github.io/umao#UnregulatedPlace
+:UnregulatedPlace rdf:type owl:Class ;
+                  rdfs:subClassOf :MartialArtExecutionPlace ;
+                  rdfs:comment "A physical location where some martial art execution takes place and in which no regulation exists."@en ;
+                  rdfs:label "Unregulated Place"@en ;
+                  skos:prefLabel "Unregulated Place"@en .
+
+
+###  http://Psychobagger.github.io/umao#UpperBodyEquipment
+:UpperBodyEquipment rdf:type owl:Class ;
+                    rdfs:subClassOf :WornEquipment .
+
+
+###  http://Psychobagger.github.io/umao#Uppercut
+:Uppercut rdf:type owl:Class ;
+          rdfs:subClassOf :PunchStrike .
+
+
+###  http://Psychobagger.github.io/umao#UtilizedEquipment
+:UtilizedEquipment rdf:type owl:Class ;
+                   rdfs:subClassOf :BodyEquipment .
+
+
+###  http://Psychobagger.github.io/umao#Vocalization
+:Vocalization rdf:type owl:Class ;
+              rdfs:subClassOf :UnarmedMentalDisturbanceTechnique .
+
+
+###  http://Psychobagger.github.io/umao#Waist
+:Waist rdf:type owl:Class ;
+       rdfs:subClassOf :HoldingTargetBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#Weapon
+:Weapon rdf:type owl:Class ;
+        rdfs:subClassOf :UtilizedEquipment .
+
+
+###  http://Psychobagger.github.io/umao#WeaponsFocusedMartialArt
+:WeaponsFocusedMartialArt rdf:type owl:Class ;
+                          rdfs:subClassOf :PracticalityFocusedMartialArt .
+
+
+###  http://Psychobagger.github.io/umao#Weave
+:Weave rdf:type owl:Class ;
+       rdfs:subClassOf :UnarmedDefendingTechnique .
+
+
+###  http://Psychobagger.github.io/umao#WeightAdvantageTechnique
+:WeightAdvantageTechnique rdf:type owl:Class ;
+                          rdfs:subClassOf :BodyAdvantageTechnique .
+
+
+###  http://Psychobagger.github.io/umao#WeightBasedRankingSystem
+:WeightBasedRankingSystem rdf:type owl:Class ;
+                          rdfs:subClassOf :MartialArtSportRankingSystem ;
+                          rdfs:comment "A system by which some martial art agent is ranked with respect to other martial art agents within a sporting martial art by way of bodily weight."@en .
+
+
+###  http://Psychobagger.github.io/umao#Win
+:Win rdf:type owl:Class ;
+     rdfs:subClassOf :FightOutcome ;
+     rdfs:comment "The outcome of some martial art agent who is victorious over some other martial art agent in some martial art execution."@en ;
+     rdfs:label "Win"@en ;
+     skos:altLabel "Success"@en ,
+                   "Victory"@en ;
+     skos:prefLabel "Win"@en .
+
+
+###  http://Psychobagger.github.io/umao#WornEquipment
+:WornEquipment rdf:type owl:Class ;
+               rdfs:subClassOf :BodyEquipment .
+
+
+###  http://Psychobagger.github.io/umao#Wrap
+:Wrap rdf:type owl:Class ;
+      rdfs:subClassOf :HandEquipment .
+
+
+###  http://Psychobagger.github.io/umao#Wrist
+:Wrist rdf:type owl:Class ;
+       rdfs:subClassOf :HoldingTargetBodyPart .
+
+
+###  http://Psychobagger.github.io/umao#WristLock
+:WristLock rdf:type owl:Class ;
+           rdfs:subClassOf :Lock ;
+           rdfs:comment "A martial art technique in which some wrist of some opponent is locked by some attacker."@en ;
+           rdfs:label "Wrist Lock"@en ;
+           skos:prefLabel "Wrist Lock"@en .
+
+
+###  http://schema.org/AchieveAction
+<http://schema.org/AchieveAction> rdf:type owl:Class ;
+                                  rdfs:subClassOf <http://schema.org/Action> ;
+                                  rdfs:isDefinedBy "https://schema.org/"@en .
+
+
+###  http://schema.org/Action
+<http://schema.org/Action> rdf:type owl:Class ;
+                           rdfs:subClassOf <http://schema.org/Thing> ;
+                           rdfs:isDefinedBy "https://schema.org/"@en .
+
+
+###  http://schema.org/AnatomicalStructure
+<http://schema.org/AnatomicalStructure> rdf:type owl:Class ;
+                                        rdfs:subClassOf <http://schema.org/MedicalEntity> ;
+                                        rdfs:isDefinedBy "https://schema.org/"@en .
+
+
+###  http://schema.org/CreativeWork
+<http://schema.org/CreativeWork> rdf:type owl:Class ;
+                                 rdfs:subClassOf <http://schema.org/Thing> ;
+                                 rdfs:isDefinedBy "https://schema.org/"@en .
+
+
+###  http://schema.org/ExercisePlan
+<http://schema.org/ExercisePlan> rdf:type owl:Class ;
+                                 rdfs:subClassOf <http://schema.org/CreativeWork> ,
+                                                 <http://schema.org/PhysicalActivity> ;
+                                 rdfs:isDefinedBy "https://schema.org/"@en .
+
+
+###  http://schema.org/Intangible
+<http://schema.org/Intangible> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://schema.org/Thing> ;
+                               rdfs:isDefinedBy "https://schema.org/"@en .
+
+
+###  http://schema.org/InteractAction
+<http://schema.org/InteractAction> rdf:type owl:Class ;
+                                   rdfs:subClassOf <http://schema.org/Action> ;
+                                   rdfs:isDefinedBy "https://schema.org/"@en .
+
+
+###  http://schema.org/LifestyleModification
+<http://schema.org/LifestyleModification> rdf:type owl:Class ;
+                                          rdfs:subClassOf <http://schema.org/MedicalEntity> ;
+                                          rdfs:isDefinedBy "https://schema.org/"@en .
+
+
+###  http://schema.org/MedicalEntity
+<http://schema.org/MedicalEntity> rdf:type owl:Class ;
+                                  rdfs:subClassOf <http://schema.org/Thing> ;
+                                  rdfs:isDefinedBy "https://schema.org/"@en .
+
+
+###  http://schema.org/Organization
+<http://schema.org/Organization> rdf:type owl:Class ;
+                                 rdfs:subClassOf <http://schema.org/Thing> ;
+                                 rdfs:isDefinedBy "https://schema.org/"@en .
+
+
+###  http://schema.org/Person
+<http://schema.org/Person> rdf:type owl:Class ;
+                           rdfs:subClassOf <http://schema.org/Thing> ;
+                           rdfs:isDefinedBy "https://schema.org/"@en .
+
+
+###  http://schema.org/PhysicalActivity
+<http://schema.org/PhysicalActivity> rdf:type owl:Class ;
+                                     rdfs:subClassOf <http://schema.org/LifestyleModification> ;
+                                     rdfs:isDefinedBy "https://schema.org/"@en .
+
+
+###  http://schema.org/Place
+<http://schema.org/Place> rdf:type owl:Class ;
+                          rdfs:subClassOf <http://schema.org/Thing> ;
+                          rdfs:isDefinedBy "https://schema.org/"@en .
+
+
+###  http://schema.org/PlayAction
+<http://schema.org/PlayAction> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://schema.org/Action> ;
+                               rdfs:isDefinedBy "https://schema.org/"@en .
+
+
+###  http://schema.org/Product
+<http://schema.org/Product> rdf:type owl:Class ;
+                            rdfs:subClassOf <http://schema.org/Thing> ;
+                            rdfs:isDefinedBy "https://schema.org/"@en .
+
+
+###  http://schema.org/Rating
+<http://schema.org/Rating> rdf:type owl:Class ;
+                           rdfs:subClassOf <http://schema.org/Intangible> ;
+                           rdfs:isDefinedBy "https://schema.org/"@en .
+
+
+###  http://schema.org/SportsOrganization
+<http://schema.org/SportsOrganization> rdf:type owl:Class ;
+                                       rdfs:subClassOf <http://schema.org/Organization> ;
+                                       rdfs:isDefinedBy "https://schema.org/"@en .
+
+
+###  http://schema.org/SuperficialAnatomy
+<http://schema.org/SuperficialAnatomy> rdf:type owl:Class ;
+                                       rdfs:subClassOf <http://schema.org/MedicalEntity> ;
+                                       rdfs:isDefinedBy "https://schema.org/"@en .
+
+
+###  http://schema.org/Thing
+<http://schema.org/Thing> rdf:type owl:Class ;
+                          rdfs:isDefinedBy "https://schema.org/"@en .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
