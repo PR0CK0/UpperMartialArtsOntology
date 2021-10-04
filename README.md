@@ -16,5 +16,12 @@ I am not a mystic, therefore knowledge must be derived from thought. This ontolo
 # Is it done?
 No, not really. I will never be satisfied with it. It may serve well as a basis for someone else who is more knowledgeable, but I will probably be editing it for a long time intermittently.
 
+# What's next?
+At this point I realize I am talking to no one but myself. Let this readme serve as documentation for my work. I intend to do several things:
+* Implement a github.io page and a browseable ontology thing with CSS (like [this](https://dublincore.org/specifications/dublin-core/dcmi-terms/))
+* Eventually, see if you can implement a specific martial art (like Jeet Kun Do, Judo or Sumo) using the constructs in UMAO; this will provide good validation/identify holes
+* Maybe use DL-Learner to find other holes?
+* Hash out the rest of the relationships, of which there are many to check and add
+
 # Can I use it?
 Yes; just link back to this Github for reference to future versions.
