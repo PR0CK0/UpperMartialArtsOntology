@@ -23,5 +23,8 @@ At this point I realize I am talking to no one but myself. Let this readme serve
 * Maybe use DL-Learner to find other holes?
 * Hash out the rest of the relationships, of which there are many to check and add
 
+# Can I contribute?
+Yes, yes and yes. Make an issue and comment on things you think are missing or wrong. There's an old saying in the semantic web community, I think from a seminal paper on the matter of ontologies, that states "a conceptualization isn't useful unless it is shared." So, please, suggest away. I'm not keen on someone updating the turtle file itself, though, because I have never done version control for RDF... I guess this could be ok if a dedicated contributer or two came about. As it stands, I'm alone in this endeavour.
+
 # Can I use it?
 Yes; just link back to this Github for reference to future versions.
